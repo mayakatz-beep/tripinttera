@@ -119,6 +119,8 @@
   }
   nav.tabs button[data-page="overview"] { --dot: var(--teal); }
   nav.tabs button[data-page="booking"]  { --dot: var(--amber); }
+  nav.tabs button[data-page="packing"]  { --dot: var(--violet); }
+  nav.tabs button[data-page="weather"]  { --dot: var(--sky); }
   nav.tabs button[data-page="day1"]     { --dot: var(--coral); }
   nav.tabs button[data-page="day2"]     { --dot: var(--sky); }
   nav.tabs button[data-page="day3"]     { --dot: var(--pine); }
@@ -143,6 +145,27 @@
   #day1 { --accent: var(--coral); } #day2 { --accent: var(--sky); }
   #day3 { --accent: var(--pine); } #day4 { --accent: var(--violet); }
   #day5 { --accent: var(--teal); } #booking { --accent: var(--amber); }
+  #packing { --accent: var(--violet); } #weather { --accent: var(--sky); }
+
+  /* weather */
+  .weather-loc { margin-bottom: 22px; }
+  .weather-loc h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  .weather-days { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+  .weather-days::-webkit-scrollbar { height: 6px; }
+  .weather-days::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+  .wday {
+    flex: 0 0 auto; min-width: 108px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 12px 10px; text-align: center; box-shadow: var(--shadow);
+  }
+  .wday.trip { border: 2px solid var(--sky); box-shadow: 0 6px 18px color-mix(in srgb, var(--sky) 25%, transparent); }
+  .wday .wd-date { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+  .wday .wd-trip { font-size: 0.68rem; color: var(--sky); font-weight: 700; }
+  .wday .wd-emoji { font-size: 1.9rem; margin: 6px 0 4px; line-height: 1; }
+  .wday .wd-desc { font-size: 0.72rem; color: var(--muted); min-height: 2.1em; }
+  .wday .wd-temp { font-weight: 700; font-size: 0.95rem; margin-top: 4px; }
+  .wday .wd-temp .lo { color: var(--muted); font-weight: 500; }
+  .wday .wd-rain { font-size: 0.76rem; color: var(--sky); margin-top: 3px; }
+  .weather-updated { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
 
   h2.page-title {
     font-size: 1.4rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text);
@@ -306,6 +329,8 @@
 <nav class="tabs" id="tabs">
   <button data-page="overview" class="active">סקירה</button>
   <button data-page="booking">רשימת הזמנות ✅</button>
+  <button data-page="packing">מה לארוז 🎒</button>
+  <button data-page="weather">מזג אוויר 🌦️</button>
   <button data-page="day1">יום 1 · שישי</button>
   <button data-page="day2">יום 2 · שבת</button>
   <button data-page="day3">יום 3 · ראשון</button>
@@ -344,6 +369,24 @@
     <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
     <button class="reset-btn" id="resetBtn">איפוס כל הסימונים</button>
     <div id="checklist"></div>
+  </section>
+
+  <!-- PACKING -->
+  <section class="page" id="packing">
+    <h2 class="page-title">מה לארוז 🎒</h2>
+    <div class="day-summary">רשימה לפי המסלול שלכם — הרים קרירים וגשומים לפרקים, פארק מים, וברטיסלבה החמה. סמנו מה ארזתם; הסימונים נשמרים במכשיר.</div>
+    <div class="progress-label" id="packLabel">0 מתוך 0 נארזו</div>
+    <div class="progress-wrap"><div class="progress-bar" id="packBar"></div></div>
+    <button class="reset-btn" id="packReset">איפוס רשימת האריזה</button>
+    <div id="packlist"></div>
+  </section>
+
+  <!-- WEATHER -->
+  <section class="page" id="weather">
+    <h2 class="page-title">מזג אוויר 🌦️</h2>
+    <div class="day-summary">תחזית חיה שמתעדכנת אוטומטית בכל פתיחת דף. תאריכי הטיול (24–28.7) מודגשים ויופיעו כאן ברגע שייכנסו לטווח התחזית — כ-16 יום לפני.</div>
+    <div id="weatherContent"><p class="note">טוען תחזית…</p></div>
+    <div class="tip-card" style="margin-top:14px;">🌡️ <b>ממוצע עונתי לסוף יולי (לגיבוי):</b> בעיירות הטטרה (~1,000 מ') ימים 18–23°C ולילות קרירים 8–12°C, עם סופות רעמים אחה"צ; <b>בגובה</b> (רכבלים/מגדלים) 5–12°C ורוחות. בברטיסלבה חם ויבש, 26–31°C. לכן שכבה חמה ומעיל גשם קל הם חובה גם בקיץ.</div>
   </section>
 
   <section class="page" id="day1">
@@ -680,6 +723,112 @@ document.getElementById('shareBtn').addEventListener('click', async () => {
   }
   tick(); setInterval(tick, 3600000);
 })();
+
+// ---------- PACKING ----------
+const packingItems = [
+  {cat:'🏔️ להרים (חובה — גם בקיץ)', items:['שכבת פליז / סווטשירט חם לכל אחד','מעיל או ברדס גשם קל ומתקפל','נעלי הליכה סגורות ונוחות','חולצות שכבה ארוכה (לרכבלים ולתצפיות)','גרביים נוחות להליכות']},
+  {cat:'🩱 לפארק המים (AquaCity)', items:['בגד ים לכל אחד','כפכפים','מגבת קטנה / מגבת מהירת ייבוש','משקפת שחייה (אופציונלי)']},
+  {cat:'☀️ שמש והגנה', items:['כובע לכל אחד','משקפי שמש','קרם הגנה (בגובה השמש חזקה)','בקבוק מים רב-פעמי']},
+  {cat:'🎒 ציוד יומי וטכני', items:['תיק גב קטן ליום','מתאם שקע אירופי (Type E/F)','פאוור-בנק + כבלי טעינה','ערכת עזרה ראשונה + פלסטרים לשלפוחיות','נייר טואלט/טישו קטן לדרך']},
+  {cat:'🏙️ לברטיסלבה החמה', items:['בגדים קלילים ואווריריים','סנדלים נוחים להליכה','חולצה/שמלה קלה לערב']},
+  {cat:'📄 מסמכים וכסף', items:['דרכונים + צילום/סריקה בטלפון','כרטיסי טיסה — צ\'ק-אין אונליין מראש','כרטיסי אשראי + מזומן ביורו','אישורי לינה מודפסים/בטלפון','ביטוח נסיעות']},
+];
+function getPack() { try { return JSON.parse(localStorage.getItem('sk_trip_packing') || '{}'); } catch(e) { return {}; } }
+function packId(c,i){ return 'p_' + c + '_' + i; }
+function renderPacking() {
+  const state = getPack();
+  const el = document.getElementById('packlist');
+  el.innerHTML = packingItems.map((g, gi) => `
+    <div style="margin-bottom:14px;">
+      <div class="progress-label" style="margin:8px 2px 8px; font-weight:700; color:var(--accent);">${g.cat}</div>
+      ${g.items.map((it, ii) => { const id = packId(gi,ii); return `
+        <div class="check-card ${state[id]?'done':''}" id="card-${id}">
+          <input type="checkbox" id="chk-${id}" ${state[id]?'checked':''} onchange="togglePack('${id}')">
+          <div class="check-body"><div class="ct">${it}</div></div>
+        </div>`; }).join('')}
+    </div>`).join('');
+  updatePackProgress(state);
+}
+function updatePackProgress(state) {
+  let total = 0; packingItems.forEach(g => total += g.items.length);
+  const done = Object.values(state).filter(Boolean).length;
+  document.getElementById('packLabel').textContent = `${done} מתוך ${total} נארזו`;
+  document.getElementById('packBar').style.width = (total ? done/total*100 : 0) + '%';
+}
+function togglePack(id) {
+  const state = getPack();
+  state[id] = document.getElementById('chk-' + id).checked;
+  localStorage.setItem('sk_trip_packing', JSON.stringify(state));
+  document.getElementById('card-' + id).classList.toggle('done', !!state[id]);
+  updatePackProgress(state);
+}
+renderPacking();
+document.getElementById('packReset').addEventListener('click', () => {
+  if (confirm('לאפס את כל רשימת האריזה?')) { localStorage.removeItem('sk_trip_packing'); renderPacking(); showToast('רשימת האריזה אופסה'); }
+});
+
+// ---------- LIVE WEATHER (Open-Meteo) ----------
+const TRIP_START = '2026-07-24', TRIP_END = '2026-07-28';
+const weatherLocs = [
+  {name:'הרי הטטרה (פופראד)', emoji:'🏔️', lat:49.06, lon:20.30},
+  {name:'ברטיסלבה', emoji:'🏙️', lat:48.15, lon:17.11},
+];
+function wCode(c) {
+  if (c===0) return ['☀️','בהיר'];
+  if (c===1||c===2) return ['🌤️','מעונן חלקית'];
+  if (c===3) return ['☁️','מעונן'];
+  if (c===45||c===48) return ['🌫️','ערפל'];
+  if (c>=51&&c<=57) return ['🌦️','טפטוף'];
+  if (c>=61&&c<=67) return ['🌧️','גשם'];
+  if (c>=71&&c<=77) return ['🌨️','שלג'];
+  if (c>=80&&c<=82) return ['🌦️','ממטרים'];
+  if (c>=85&&c<=86) return ['🌨️','ממטרי שלג'];
+  if (c>=95) return ['⛈️','סופת רעמים'];
+  return ['🌡️','—'];
+}
+const heDays = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+function fmtDate(iso) {
+  const d = new Date(iso + 'T00:00:00');
+  return { wd: heDays[d.getDay()], dm: d.getDate() + '.' + (d.getMonth()+1) };
+}
+async function loadWeather() {
+  const container = document.getElementById('weatherContent');
+  try {
+    const blocks = await Promise.all(weatherLocs.map(async loc => {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}` +
+        `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
+        `&timezone=Europe%2FBratislava&forecast_days=16`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('net');
+      const d = await res.json();
+      const t = d.daily.time;
+      const tripIdx = t.map((x,i)=>i).filter(i => t[i] >= TRIP_START && t[i] <= TRIP_END);
+      const hasTrip = tripIdx.length > 0;
+      const idxs = hasTrip ? tripIdx : t.map((x,i)=>i);
+      const cards = idxs.map(i => {
+        const [emoji, desc] = wCode(d.daily.weather_code[i]);
+        const f = fmtDate(t[i]);
+        const isTrip = t[i] >= TRIP_START && t[i] <= TRIP_END;
+        return `<div class="wday ${isTrip?'trip':''}">
+          <div class="wd-date">${f.wd} · ${f.dm}</div>
+          ${isTrip?'<div class="wd-trip">● טיול</div>':'<div class="wd-trip">&nbsp;</div>'}
+          <div class="wd-emoji">${emoji}</div>
+          <div class="wd-desc">${desc}</div>
+          <div class="wd-temp">${Math.round(d.daily.temperature_2m_max[i])}° <span class="lo">/ ${Math.round(d.daily.temperature_2m_min[i])}°</span></div>
+          <div class="wd-rain">💧 ${d.daily.precipitation_probability_max[i] ?? 0}%</div>
+        </div>`;
+      }).join('');
+      const note = hasTrip ? '' : `<div class="wd-date" style="margin:0 2px 8px;color:var(--muted);font-size:.82rem;">התחזית לתאריכי הטיול עדיין מחוץ לטווח — בינתיים מוצגים 16 הימים הקרובים. התאריכים יודגשו אוטומטית כשייכנסו לטווח.</div>`;
+      return `<div class="weather-loc"><h3>${loc.emoji} ${loc.name}</h3>${note}<div class="weather-days">${cards}</div></div>`;
+    }));
+    const now = new Date();
+    container.innerHTML = blocks.join('') +
+      `<div class="weather-updated">🔄 עודכן: ${now.toLocaleString('he-IL',{day:'numeric',month:'numeric',hour:'2-digit',minute:'2-digit'})} · מקור: Open-Meteo</div>`;
+  } catch(e) {
+    container.innerHTML = `<p class="note">לא הצלחנו לטעון את התחזית כרגע (אולי אין חיבור לאינטרנט). התחזית תיטען שוב בפתיחה הבאה. בינתיים אפשר להיעזר בממוצע העונתי למטה.</p>`;
+  }
+}
+loadWeather();
 
 // ---------- TOAST ----------
 let toastTimer;
