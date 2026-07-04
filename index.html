@@ -121,6 +121,8 @@
   nav.tabs button[data-page="booking"]  { --dot: var(--amber); }
   nav.tabs button[data-page="packing"]  { --dot: var(--violet); }
   nav.tabs button[data-page="weather"]  { --dot: var(--sky); }
+  nav.tabs button[data-page="budapest"] { --dot: var(--violet); }
+  nav.tabs button[data-page="miskolc"]  { --dot: var(--pine); }
   nav.tabs button[data-page="day1"]     { --dot: var(--coral); }
   nav.tabs button[data-page="day2"]     { --dot: var(--sky); }
   nav.tabs button[data-page="day3"]     { --dot: var(--pine); }
@@ -146,6 +148,7 @@
   #day3 { --accent: var(--pine); } #day4 { --accent: var(--violet); }
   #day5 { --accent: var(--teal); } #booking { --accent: var(--amber); }
   #packing { --accent: var(--violet); } #weather { --accent: var(--sky); }
+  #budapest { --accent: var(--violet); } #miskolc { --accent: var(--pine); }
 
   /* weather */
   .weather-loc { margin-bottom: 22px; }
@@ -318,7 +321,7 @@
     <button class="icon-btn" id="themeBtn" title="מצב לילה">🌙</button>
   </div>
   <h1><span>🏔️</span> טיול משפחתי לסלובקיה</h1>
-  <div class="sub">24–28 ביולי 2026 · תחבורה ציבורית בלבד · קושיצה → הטטרה הגבוהים → ברטיסלבה</div>
+  <div class="sub">21–28 ביולי 2026 · תחבורה ציבורית בלבד · בודפשט · מילשקוץ · קושיצה → הטטרה → ברטיסלבה</div>
   <div class="countdown" id="countdown">⏳</div>
   <svg class="mountains" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M0,70 L0,42 L120,18 L240,46 L360,10 L500,48 L640,20 L780,52 L920,14 L1080,50 L1220,24 L1340,48 L1440,30 L1440,70 Z" fill="var(--bg)" opacity="0.55"/>
@@ -331,6 +334,8 @@
   <button data-page="booking">רשימת הזמנות ✅</button>
   <button data-page="packing">מה לארוז 🎒</button>
   <button data-page="weather">מזג אוויר 🌦️</button>
+  <button data-page="budapest">בודפשט 🇭🇺</button>
+  <button data-page="miskolc">מילשקוץ ⚽</button>
   <button data-page="day1">יום 1 · שישי</button>
   <button data-page="day2">יום 2 · שבת</button>
   <button data-page="day3">יום 3 · ראשון</button>
@@ -350,7 +355,10 @@
       <div class="item-body">
         <h3 class="activity-title">מסלול בקצרה</h3>
         <p style="margin:0 0 10px;">
-          <b>יום 1 (24.7, שישי):</b> קושיצה ← FlixBus ← סטארי סמוקובץ' (הטטרה הגבוהים)<br>
+          <b>21.7 (שלישי, ערב):</b> טיסה לבודפשט וצ'ק-אין<br>
+          <b>22.7 (רביעי):</b> יום כיף מלא בבודפשט — טירת בודה, הדנובה, מרחצאות Széchenyi ושייט ערב<br>
+          <b>23.7 (חמישי):</b> רכבת בצהריים למילשקוץ ומשחק כדורגל בערב<br>
+          <b>יום 1 (24.7, שישי):</b> רכבת ממילשקוץ לקושיצה ← FlixBus ← סטארי סמוקובץ' (הטטרה הגבוהים)<br>
           <b>יום 2 (25.7, שבת):</b> רכבל לסקלנטה פלסו, קורקינטי הרים, Tatrabob, ערב ב-AquaCity Poprad<br>
           <b>יום 3 (26.7, ראשון):</b> פוניקולר להרביאנוק ומפלי מים, שטרבסקה פלסו — Tatras Tower, (אופציונלי: רכבל סוליסקום) ושייט באגם<br>
           <b>יום 4 (27.7, שני):</b> בוקר צמרות העצים באחלדקה (Bachledka), רכבת ישירה לברטיסלבה<br>
@@ -389,9 +397,21 @@
     <div class="tip-card" style="margin-top:14px;">🌡️ <b>ממוצע עונתי לסוף יולי (לגיבוי):</b> בעיירות הטטרה (~1,000 מ') ימים 18–23°C ולילות קרירים 8–12°C, עם סופות רעמים אחה"צ; <b>בגובה</b> (רכבלים/מגדלים) 5–12°C ורוחות. בברטיסלבה חם ויבש, 26–31°C. לכן שכבה חמה ומעיל גשם קל הם חובה גם בקיץ.</div>
   </section>
 
+  <section class="page" id="budapest">
+    <h2 class="page-title">בודפשט 🇭🇺 — 21–22.7 (שלישי–רביעי)</h2>
+    <div class="day-summary">נחיתה בערב ה-21.7, ויום כיף מלא ב-22.7: צד בודה והנופים, שוק ולנגוש, הדנובה, מרחצאות Széchenyi ושייט ערב מרהיב.</div>
+    <div id="budapestlist"></div>
+  </section>
+
+  <section class="page" id="miskolc">
+    <h2 class="page-title">מילשקוץ ⚽ — 23.7 (חמישי)</h2>
+    <div class="day-summary">בוקר אחרון בבודפשט, רכבת בצהריים למילשקוץ, וערב של משחק כדורגל באווירה מקומית.</div>
+    <div id="miskolclist"></div>
+  </section>
+
   <section class="page" id="day1">
-    <h2 class="page-title">יום שישי, 24.7 — קושיצה והגעה לטטרה</h2>
-    <div class="day-summary">הגעה לקושיצה בצהריים, סיור קצר וארוחה, ואז FlixBus ישיר לסטארי סמוקובץ'.</div>
+    <h2 class="page-title">יום שישי, 24.7 — ממילשקוץ לקושיצה והטטרה</h2>
+    <div class="day-summary">בוקר: רכבת חוצת-גבול ממילשקוץ לקושיצה. צהריים: סיור וארוחה בקושיצה, ואז FlixBus ישיר לסטארי סמוקובץ' — כאן מתחיל החלק הסלובקי.</div>
     <div id="day1list"></div>
   </section>
 
@@ -431,6 +451,16 @@
   <section class="page" id="routemap" style="--accent: var(--pine);">
     <h2 class="page-title">מפת המסלול — יום אחרי יום</h2>
     <p class="note">כל מפה מציגה את רצף התחנות של אותו יום. אם קו התחבורה הציבורית לא מוצג מדויק, המפה עדיין מראה את הכיוון והמרחק בין התחנות.</p>
+
+    <div class="routemap-day" style="margin-bottom:16px;">
+      <h3>🇭🇺 22.7 — יום הכיף בבודפשט</h3>
+      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Buda+Castle+Budapest&daddr=Fisherman%27s+Bastion+Budapest+to:Sz%C3%A9chenyi+Chain+Bridge+to:Great+Market+Hall+Budapest+to:Hungarian+Parliament+Building+to:Sz%C3%A9chenyi+Thermal+Bath&output=embed" loading="lazy"></iframe></div>
+    </div>
+
+    <div class="routemap-day" style="margin-bottom:16px;">
+      <h3>⚽ 23–24.7 — בודפשט ← מילשקוץ ← קושיצה</h3>
+      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Budapest+Keleti+railway+station&daddr=Miskolc-Tiszai+railway+station+to:Ko%C5%A1ice+train+station&output=embed" loading="lazy"></iframe></div>
+    </div>
 
     <div class="routemap-day" style="margin-bottom:16px;">
       <h3>🟠 יום 1, שישי — קושיצה ← נובי סמוקובץ'</h3>
@@ -490,10 +520,33 @@ const bookingItems = [
   {id:'b9', urgent:false, title:'תצפית UFO בברטיסלבה', desc:'10€ מבוגר / 7€ נוער. שווה לבדוק כרטיס מראש כדי לדלג על תור למעלית.', link:'', linkLabel:''},
   {id:'b10', urgent:false, title:'טירת דווין (Devín Castle)', desc:'6€ מבוגר / 3€ נוער. קנייה בקופה בכניסה, אין צורך בהזמנה מראש.', link:'', linkLabel:''},
   {id:'b11', urgent:true, title:'הסעה לשדה התעופה ברטיסלבה (28.7, טיסה 20:25)', desc:'טיסה פנים-אירופית בתוך שנגן וכבודת יד בלבד — מספיק להגיע ~1.5 שעות לפני. אוטובוס ישיר קו 61 מהתחנה המרכזית (~25 דק\') או מונית/Bolt מהעיר העתיקה (~20 דק\'). לצאת מהעיר כ-18:20 כדי להגיע ~18:55. מומלץ צ\'ק-אין אונליין וכרטיס עלייה בטלפון מראש.', link:'', linkLabel:''},
+  {id:'b12', urgent:true, title:'כרטיסים למשחק הכדורגל במילשקוץ (23.7)', desc:'להזמין מראש דרך אתר המועדון/קופות. לוודא תאריך ושעת המשחק, שער כניסה, ומיקום מדויק של האצטדיון.', link:'https://dvtk.eu/', linkLabel:'אתר DVTK'},
+  {id:'b13', urgent:false, title:'רכבת בודפשט → מילשקוץ (23.7, יציאה 12:30)', desc:'MÁV — ~4,000–7,000 HUF לאדם. רכבות ישירות מ-Budapest-Keleti, ~2 שעות. שווה לקנות אונליין מראש.', link:'https://www.mavcsoport.hu/en', linkLabel:'הזמנה ב-MÁV'},
+  {id:'b14', urgent:false, title:'רכבת מילשקוץ → קושיצה (24.7, יציאה 10:30)', desc:'רכבת חוצת-גבול ~1.5 שעות, ~10–15 € לאדם — תחילת החלק הסלובקי. לבדוק שעה מדויקת יום לפני.', link:'https://www.mavcsoport.hu/en', linkLabel:'MÁV / ZSSK'},
+  {id:'b15', urgent:false, title:'לינה בבודפשט (2 לילות: 21–22.7)', desc:'מומלץ מרכזי (סביב Deák tér / צד פשט) להליכה נוחה לאתרים ולתחבורה.', link:'', linkLabel:''},
+  {id:'b16', urgent:false, title:'לינה במילשקוץ (23.7)', desc:'לילה אחד — קרוב לאצטדיון או למרכז/תחנת הרכבת, לנוחות בוקר היציאה לקושיצה.', link:'', linkLabel:''},
 ];
 
 const days = {
+  budapest: [
+    {time:'21.7 · ערב', place:'שדה התעופה בודפשט (BUD) → מרכז העיר', activity:'נחיתה, הסעה וצ\'ק-אין', route:'נחיתה בבודפשט. הכי נוח: אוטובוס 100E (Airport Express) ישיר לתחנת Deák Ferenc tér במרכז (~40 דק\'), או Bolt/מונית (~30 דק\'). צ\'ק-אין למלון וארוחת ערב קלה בסביבה.', cost:'2,200 HUF (100E) לאדם / ~9,000 HUF מונית', link:'', linkLabel:'', mapQuery:'Budapest Ferenc Liszt International Airport'},
+    {time:'22.7 · 09:00', place:'טירת בודה ומצודת הדייגים', activity:'בוקר בצד בודה — הנופים הכי יפים', route:'עלייה בפוניקולר ההיסטורי Budavári Sikló (או הליכה) לגבעת הטירה. טירת בודה, מצודת הדייגים (Halászbástya) הלבנה עם הצריחים וכנסיית מתיאש — נוף פנורמי על הדנובה והפרלמנט.', cost:'פוניקולר ~1,500 HUF; מצודה כניסה מזערית', link:'', linkLabel:'', mapQuery:'Fisherman\'s Bastion Budapest'},
+    {time:'22.7 · 11:30', place:'גשר השרשראות', activity:'חציית הדנובה לצד פשט', route:'ירידה מגבעת הטירה וחציית גשר השרשראות המפורסם (Széchenyi Lánchíd) ברגל אל צד פשט.', cost:'חינם', link:'', linkLabel:'', mapQuery:'Széchenyi Chain Bridge Budapest'},
+    {time:'22.7 · 12:30', place:'השוק המרכזי הגדול', activity:'צהריים — לנגוש וסטריט פוד', route:'שוק מקורה ענק ומרשים. בקומה העליונה דוכני אוכל: לנגוש (בצק מטוגן), גולאש ונקניקיות — כיף גדול לנערים; קומת מזכרות ותבלינים למטה.', cost:'~4,000–6,000 HUF לאדם', link:'', linkLabel:'', mapQuery:'Great Market Hall Budapest'},
+    {time:'22.7 · 14:00', place:'פרלמנט + הנעליים על גדת הדנובה', activity:'ציוני דרך על הנהר', route:'הליכה לאורך הדנובה אל בניין הפרלמנט המרשים (מבחוץ; סיור פנימי אפשרי בהזמנה מראש) ואנדרטת "הנעליים על גדת הדנובה" המרגשת.', cost:'חינם (סיור פנימי ~10,000 HUF)', link:'', linkLabel:'', mapQuery:'Hungarian Parliament Building'},
+    {time:'22.7 · 15:30', place:'מרחצאות Széchenyi', activity:'⭐ מרחצאות תרמיים — כיף משפחתי', route:'מטרו הצהוב (קו M1 ההיסטורי) לכיכר הגיבורים ולפארק העיר. רחצה בבריכות התרמיות החמות בחוץ — חוויה בודפשטית קלאסית שכולם אוהבים. להביא בגד ים ומגבת.', cost:'~10,000–12,000 HUF כניסה', link:'https://www.szechenyibath.hu/', linkLabel:'אתר Széchenyi', mapQuery:'Széchenyi Thermal Bath Budapest'},
+    {time:'22.7 · 18:00', place:'כיכר הגיבורים ופארק העיר', activity:'תצפית וזמן חופשי', route:'כיכר הגיבורים המונומנטלית וטירת Vajdahunyad הרומנטית שלידה, זמן חופשי לנוח לפני הערב.', cost:'חינם', link:'', linkLabel:'', mapQuery:'Heroes\' Square Budapest'},
+    {time:'22.7 · 20:00', place:'שייט ערב על הדנובה', activity:'⭐ שיא היום — בודפשט מוארת', route:'שייט ערב על הדנובה כשהפרלמנט, הטירה והגשרים מוארים — החוויה הכי מרשימה בעיר. שייט של כשעה, לעיתים עם משקה כלול. מומלץ להזמין מראש בקיץ.', cost:'~5,000–9,000 HUF לאדם', link:'', linkLabel:'', mapQuery:'Danube evening cruise Budapest'},
+  ],
+  miskolc: [
+    {time:'23.7 · 09:00–11:30', place:'בודפשט — בוקר אחרון', activity:'בוקר חופשי + צ\'ק-אאוט', route:'ארוחת בוקר וזמן קצר אחרון בעיר (למשל שדרת אנדראשי או קפה), צ\'ק-אאוט, ומעבר לתחנת הרכבת המזרחית Budapest-Keleti.', cost:'—', link:'', linkLabel:'', mapQuery:'Budapest Keleti railway station'},
+    {time:'12:30–~14:40', place:'רכבת בודפשט → מילשקוץ', activity:'נסיעה למילשקוץ', route:'רכבת ישירה מ-Budapest-Keleti לתחנת Miskolc-Tiszai (~2 שעות), על פני המישור ההונגרי.', cost:'~4,000–7,000 HUF לאדם', link:'https://www.mavcsoport.hu/en', linkLabel:'MÁV — רכבות הונגריה', mapQuery:'Miskolc-Tiszai railway station'},
+    {time:'~15:00–17:30', place:'מילשקוץ — צ\'ק-אין', activity:'הגעה, התארגנות וארוחה', route:'צ\'ק-אין ללינה במילשקוץ, מנוחה קצרה וארוחה מוקדמת לפני המשחק.', cost:'—', link:'', linkLabel:'', mapQuery:'Miskolc Hungary'},
+    {time:'23.7 · ערב', place:'אצטדיון DVTK, מילשקוץ', activity:'⚽ משחק הכדורגל', route:'הגעה לאצטדיון (ככל הנראה DVTK Stadion של Diósgyőri VTK) לצפייה במשחק באווירת אוהדים מקומית. לוודא מראש את שעת פתיחת השערים ולהגיע ~45–60 דק\' לפני. חזרה ללינה אחרי המשחק.', cost:'לפי כרטיסים', link:'https://dvtk.eu/', linkLabel:'אתר DVTK', mapQuery:'DVTK Stadion Miskolc'},
+  ],
   day1: [
+    {time:'24.7 · 08:30–10:00', place:'מילשקוץ', activity:'בוקר וצ\'ק-אאוט', route:'ארוחת בוקר, צ\'ק-אאוט מהלינה במילשקוץ, ומעבר לתחנת הרכבת Miskolc-Tiszai.', cost:'—', link:'', linkLabel:'', mapQuery:'Miskolc-Tiszai railway station'},
+    {time:'10:30–~12:00', place:'רכבת מילשקוץ → קושיצה', activity:'מעבר לסלובקיה — כאן מתחיל הטיול', route:'רכבת ישירה חוצת-גבול הונגריה→סלובקיה (אזור שנגן, בלי ביקורת דרכונים), כ-1.5 שעות. הגעה לקושיצה סביב 12:00, וישר להפקדת המזוודות ותחילת התוכנית.', cost:'~10–15 € לאדם', link:'', linkLabel:'', mapQuery:'Miskolc to Košice train'},
     {time:'12:00–12:30', place:'תחנת הרכבת קושיצה', activity:'הפקדת מזוודות', route:'הליכה ישירה לעמדת שמירת החפצים (Úschovňa zavazadiel) בתחנה המרכזית, הצמודה לתחנת האוטובוסים.', cost:'5–10 €', link:'', linkLabel:'', mapQuery:'Košice railway station'},
     {time:'12:30–14:15', place:'מדרחוב Hlavná ulica, קושיצה', activity:'סיור מדרחוב וארוחת צהריים', route:'חציית הפארק העירוני (~10 דק\') מהתחנה, הגעה למדרחוב, קתדרלת אליזבת הקדושה והמזרקה המנגנת. ארוחת צהריים קלה (למשל Republika Východu).', cost:'40–60 € (ארוחה)', link:'', linkLabel:'', mapQuery:'Hlavná ulica Košice'},
     {time:'14:15–14:55', place:'תחנת הרכבת קושיצה', activity:'חזרה ועלייה לפליקסבאס', route:'הליכה חזרה (~10 דק\'), איסוף המזוודות, התייצבות ברציף לפחות 20 דק\' לפני היציאה.', cost:'כלול בכרטיס', link:'', linkLabel:'', mapQuery:'Košice bus station Autobusová stanica'},
@@ -655,7 +708,7 @@ window.addEventListener('hashchange', () => { const p = location.hash.replace('#
 (function(){ const p = location.hash.replace('#',''); if (p) showPage(p, false); })();
 
 // ---------- SEARCH ----------
-['day1','day2','day3','day4','day5'].forEach(id => {
+['budapest','miskolc','day1','day2','day3','day4','day5'].forEach(id => {
   const sec = document.getElementById(id);
   const list = document.getElementById(id + 'list');
   const wrap = document.createElement('div');
@@ -708,7 +761,7 @@ document.getElementById('shareBtn').addEventListener('click', async () => {
 
 // ---------- COUNTDOWN ----------
 (function(){
-  const target = new Date('2026-07-24T00:00:00');
+  const target = new Date('2026-07-21T00:00:00');
   const el = document.getElementById('countdown');
   function tick(){
     const now = new Date();
@@ -770,6 +823,7 @@ document.getElementById('packReset').addEventListener('click', () => {
 // ---------- LIVE WEATHER (Open-Meteo) ----------
 const TRIP_START = '2026-07-24', TRIP_END = '2026-07-28';
 const weatherLocs = [
+  {name:'בודפשט', emoji:'🇭🇺', lat:47.50, lon:19.04},
   {name:'הרי הטטרה (פופראד)', emoji:'🏔️', lat:49.06, lon:20.30},
   {name:'ברטיסלבה', emoji:'🏙️', lat:48.15, lon:17.11},
 ];
