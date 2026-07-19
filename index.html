@@ -1,897 +1,176 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0e3b3b">
-<title>מדריך טיול משפחתי לסלובקיה · יולי 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    color-scheme: light;
-    --teal: #0e7c7b;
-    --teal-dark: #0e3b3b;
-    --pine: #2f9e6b;
-    --coral: #e0533d;
-    --amber: #d98a2b;
-    --violet: #7a5cc4;
-    --sky: #2f7dd1;
-    --red: #c0392b;
-    --bg: #f4f1ea;
-    --card: #ffffff;
-    --border: #e6e0d4;
-    --text: #24302f;
-    --muted: #6d7876;
-    --route-bg: #f7f4ec;
-    --shadow: 0 6px 22px rgba(20,50,45,0.08);
-    --shadow-lg: 0 14px 40px rgba(20,50,45,0.14);
-    --accent: var(--teal);
-  }
-  html[data-theme="dark"] {
-    color-scheme: dark;
-    --teal: #35bdb0;
-    --teal-dark: #7ce0d4;
-    --pine: #46c088;
-    --coral: #f0806b;
-    --amber: #e6a94f;
-    --violet: #a98ce6;
-    --sky: #5aa6ea;
-    --bg: #0d1513;
-    --card: #14201d;
-    --border: #263733;
-    --text: #e7efec;
-    --muted: #93a29e;
-    --route-bg: #101a18;
-    --shadow: 0 6px 22px rgba(0,0,0,0.4);
-    --shadow-lg: 0 14px 40px rgba(0,0,0,0.5);
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    color: var(--text);
-    font-family: "Rubik", "Segoe UI", Arial, sans-serif;
-    line-height: 1.6;
-    background-color: var(--bg);
-    background-image:
-      radial-gradient(circle at 12% -5%, rgba(14,124,123,0.07), transparent 42%),
-      radial-gradient(circle at 90% 5%, rgba(224,83,61,0.06), transparent 40%);
-    transition: background-color .3s, color .3s;
-  }
-
-  /* ---------- HEADER ---------- */
-  header.top {
-    position: relative;
-    background: linear-gradient(150deg, var(--teal-dark) 0%, var(--teal) 60%, #1a9a8a 100%);
-    color: #fff;
-    padding: 26px 22px 60px;
-    overflow: hidden;
-  }
-  html[data-theme="dark"] header.top {
-    background: linear-gradient(150deg, #06201f 0%, #0e4a48 60%, #0e5c56 100%);
-  }
-  header.top .mountains {
-    position: absolute; inset-inline: 0; bottom: -1px; width: 100%; height: 70px; display: block;
-  }
-  header.top h1 {
-    margin: 0 0 6px; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  header.top .sub { font-size: 0.95rem; opacity: 0.9; max-width: 620px; font-weight: 400; }
-  .header-actions { position: absolute; inset-inline-end: 16px; top: 18px; display: flex; gap: 8px; z-index: 3; }
-  .icon-btn {
-    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28);
-    color: #fff; cursor: pointer; width: 40px; height: 40px; border-radius: 12px;
-    font-size: 1.1rem; line-height: 1; display: flex; align-items: center; justify-content: center;
-    transition: transform .15s, background .15s; backdrop-filter: blur(6px);
-  }
-  .icon-btn:hover { background: rgba(255,255,255,0.28); transform: translateY(-2px); }
-  .icon-btn:active { transform: scale(0.92); }
-  .countdown {
-    margin-top: 16px; display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28);
-    padding: 7px 16px; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
-    backdrop-filter: blur(6px); position: relative; z-index: 3;
-  }
-
-  /* ---------- TABS ---------- */
-  nav.tabs {
-    position: sticky; top: 0; z-index: 20;
-    background: color-mix(in srgb, var(--card) 82%, transparent);
-    backdrop-filter: blur(12px) saturate(1.3);
-    border-bottom: 1px solid var(--border);
-    display: flex; overflow-x: auto; gap: 6px; padding: 10px 12px;
-    box-shadow: 0 4px 20px rgba(20,50,45,0.06);
-    -webkit-overflow-scrolling: touch;
-  }
-  nav.tabs::-webkit-scrollbar { height: 0; }
-  nav.tabs button {
-    flex: 0 0 auto; border: 1.5px solid var(--border); background: transparent; color: var(--text);
-    padding: 8px 15px; border-radius: 999px; font-size: 0.88rem; font-weight: 500;
-    font-family: inherit; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 7px;
-    transition: all .18s;
-  }
-  nav.tabs button::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--dot, var(--teal)); flex: 0 0 auto; opacity: .85;
-  }
-  nav.tabs button[data-page="overview"] { --dot: var(--teal); }
-  nav.tabs button[data-page="booking"]  { --dot: var(--amber); }
-  nav.tabs button[data-page="packing"]  { --dot: var(--violet); }
-  nav.tabs button[data-page="weather"]  { --dot: var(--sky); }
-  nav.tabs button[data-page="budapest"] { --dot: var(--violet); }
-  nav.tabs button[data-page="miskolc"]  { --dot: var(--pine); }
-  nav.tabs button[data-page="day1"]     { --dot: var(--coral); }
-  nav.tabs button[data-page="day2"]     { --dot: var(--sky); }
-  nav.tabs button[data-page="day3"]     { --dot: var(--pine); }
-  nav.tabs button[data-page="day4"]     { --dot: var(--violet); }
-  nav.tabs button[data-page="day5"]     { --dot: var(--teal); }
-  nav.tabs button[data-page="routemap"] { --dot: var(--pine); }
-  nav.tabs button[data-page="costs"]    { --dot: var(--amber); }
-  nav.tabs button[data-page="tips"]     { --dot: var(--sky); }
-  nav.tabs button:hover { border-color: var(--dot); transform: translateY(-1px); }
-  nav.tabs button.active {
-    background: var(--dot); color: #fff; border-color: var(--dot);
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--dot) 45%, transparent);
-  }
-  nav.tabs button.active::before { background: #fff; opacity: 1; }
-
-  main { max-width: 920px; margin: 0 auto; padding: 22px 16px 80px; }
-  section.page { display: none; animation: fade .3s ease; }
-  section.page.active { display: block; }
-  @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-
-  /* per-day accent */
-  #day1 { --accent: var(--coral); } #day2 { --accent: var(--sky); }
-  #day3 { --accent: var(--pine); } #day4 { --accent: var(--violet); }
-  #day5 { --accent: var(--teal); } #booking { --accent: var(--amber); }
-  #packing { --accent: var(--violet); } #weather { --accent: var(--sky); }
-  #budapest { --accent: var(--violet); } #miskolc { --accent: var(--pine); }
-
-  /* weather */
-  .weather-loc { margin-bottom: 22px; }
-  .weather-loc h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
-  .weather-days { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
-  .weather-days::-webkit-scrollbar { height: 6px; }
-  .weather-days::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-  .wday {
-    flex: 0 0 auto; min-width: 108px; background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 12px 10px; text-align: center; box-shadow: var(--shadow);
-  }
-  .wday.trip { border: 2px solid var(--sky); box-shadow: 0 6px 18px color-mix(in srgb, var(--sky) 25%, transparent); }
-  .wday .wd-date { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
-  .wday .wd-trip { font-size: 0.68rem; color: var(--sky); font-weight: 700; }
-  .wday .wd-emoji { font-size: 1.9rem; margin: 6px 0 4px; line-height: 1; }
-  .wday .wd-desc { font-size: 0.72rem; color: var(--muted); min-height: 2.1em; }
-  .wday .wd-temp { font-weight: 700; font-size: 0.95rem; margin-top: 4px; }
-  .wday .wd-temp .lo { color: var(--muted); font-weight: 500; }
-  .wday .wd-rain { font-size: 0.76rem; color: var(--sky); margin-top: 3px; }
-  .weather-updated { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
-
-  h2.page-title {
-    font-size: 1.4rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text);
-    margin: 4px 0 6px; display: flex; align-items: center; gap: 12px;
-  }
-  h2.page-title::before {
-    content: ""; width: 6px; height: 30px; border-radius: 6px; background: var(--accent); flex: 0 0 auto;
-  }
-  .day-summary { font-size: 0.94rem; color: var(--muted); margin: 0 0 18px; padding-inline-start: 18px; }
-
-  /* search */
-  .search-wrap { margin: 0 0 16px; position: relative; }
-  .search-wrap input {
-    width: 100%; padding: 11px 16px 11px 40px; border: 1.5px solid var(--border);
-    border-radius: 12px; background: var(--card); color: var(--text);
-    font-size: 0.95rem; font-family: inherit; box-shadow: var(--shadow);
-  }
-  .search-wrap input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
-  .search-wrap::before { content: "🔎"; position: absolute; inset-inline-start: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
-  .no-results { color: var(--muted); font-size: 0.9rem; padding: 8px 2px; display: none; }
-
-  /* ---------- TIMELINE CARDS ---------- */
-  #day1list,#day2list,#day3list,#day4list,#day5list { position: relative; padding-inline-start: 6px; }
-  .item-card {
-    position: relative; background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 16px 18px 16px 18px; margin-bottom: 14px;
-    display: flex; gap: 16px; align-items: flex-start; box-shadow: var(--shadow);
-    border-inline-start: 5px solid var(--accent);
-    transition: transform .18s, box-shadow .18s;
-  }
-  .item-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-  .item-time {
-    flex: 0 0 auto; min-width: 84px; text-align: center;
-    background: color-mix(in srgb, var(--accent) 12%, var(--card));
-    color: var(--accent); font-weight: 700; font-size: 0.8rem;
-    padding: 8px 8px; border-radius: 12px; letter-spacing: 0.2px;
-    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
-  }
-  .item-body { flex: 1; min-width: 0; }
-  .place-line { font-size: 0.82rem; font-weight: 700; color: var(--accent); margin: 0 0 3px; }
-  .item-body h3.activity-title { margin: 0 0 8px; font-size: 1.08rem; font-weight: 700; color: var(--text); }
-  .route-text {
-    margin: 0 0 10px; font-size: 0.9rem; color: var(--muted);
-    background: var(--route-bg); border-radius: 10px; padding: 9px 12px;
-    border-inline-start: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
-  }
-  .badges { display: flex; flex-wrap: wrap; gap: 7px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px; font-size: 0.8rem; font-weight: 500;
-    padding: 5px 11px; border-radius: 999px; background: var(--route-bg); color: var(--muted);
-    border: 1px solid var(--border);
-  }
-  .badge.cost { background: color-mix(in srgb, var(--amber) 14%, var(--card)); color: var(--amber); border-color: color-mix(in srgb, var(--amber) 30%, transparent); }
-  .badge.link a, .badge.map a { text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
-  .badge.link { background: color-mix(in srgb, var(--pine) 13%, var(--card)); border-color: color-mix(in srgb, var(--pine) 28%, transparent); }
-  .badge.link a { color: var(--pine); }
-  .badge.map { background: color-mix(in srgb, var(--sky) 13%, var(--card)); border-color: color-mix(in srgb, var(--sky) 28%, transparent); }
-  .badge.map a { color: var(--sky); }
-  .badge.link a:hover, .badge.map a:hover { text-decoration: underline; }
-
-  /* ---------- CHECKLIST ---------- */
-  .check-card {
-    background: var(--card); border: 1px solid var(--border); border-inline-start: 5px solid var(--amber);
-    border-radius: 16px; padding: 14px 16px; margin-bottom: 12px;
-    display: flex; align-items: flex-start; gap: 14px; box-shadow: var(--shadow); transition: opacity .2s, transform .18s;
-  }
-  .check-card:hover { transform: translateY(-2px); }
-  .check-card.done { opacity: 0.5; border-inline-start-color: var(--pine); }
-  .check-card.done .ct { text-decoration: line-through; }
-  .check-card input[type=checkbox] { width: 23px; height: 23px; margin-top: 2px; accent-color: var(--pine); cursor: pointer; flex: 0 0 auto; }
-  .check-body { flex: 1; }
-  .check-body .ct { font-weight: 600; margin-bottom: 3px; }
-  .check-body .cd { font-size: 0.88rem; color: var(--muted); margin-bottom: 8px; }
-  .urgent-badge {
-    display: inline-block; background: var(--red); color: #fff; font-size: 0.72rem; font-weight: 700;
-    padding: 2px 9px; border-radius: 999px; margin-inline-end: 6px; vertical-align: middle;
-  }
-  .link-btn {
-    display: inline-block; background: var(--teal); color: #fff !important; text-decoration: none;
-    font-size: 0.82rem; font-weight: 600; padding: 7px 15px; border-radius: 10px; margin-top: 4px;
-    transition: background .15s, transform .15s;
-  }
-  .link-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
-  .progress-wrap { background: var(--border); border-radius: 999px; height: 14px; overflow: hidden; margin: 12px 0 8px; }
-  .progress-bar { height: 100%; width: 0%; transition: width .4s cubic-bezier(.4,0,.2,1); background: linear-gradient(90deg, var(--pine), var(--teal)); border-radius: 999px; }
-  .progress-label { font-size: 0.9rem; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
-  .reset-btn {
-    background: transparent; border: 1.5px solid var(--border); color: var(--muted);
-    font-family: inherit; font-size: 0.8rem; padding: 5px 12px; border-radius: 9px; cursor: pointer; margin-bottom: 16px;
-  }
-  .reset-btn:hover { border-color: var(--red); color: var(--red); }
-
-  /* ---------- COSTS ---------- */
-  table.costs {
-    width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; overflow: hidden; font-size: 0.9rem; box-shadow: var(--shadow);
-  }
-  table.costs th, table.costs td { padding: 11px 12px; text-align: right; border-bottom: 1px solid var(--border); }
-  table.costs th { background: color-mix(in srgb, var(--teal) 12%, var(--card)); color: var(--teal); font-weight: 700; }
-  table.costs tbody tr:last-child td { border-bottom: 0; }
-  table.costs tbody tr:hover td { background: var(--route-bg); }
-  table.costs a { color: var(--teal); font-weight: 600; }
-  table.costs tr.cat-head td { background: var(--route-bg); font-weight: 700; color: var(--text); font-size: 0.86rem; letter-spacing: 0.3px; }
-
-  /* ---------- TIPS / NOTES / MAPS ---------- */
-  .tip-card {
-    background: linear-gradient(135deg, color-mix(in srgb, var(--pine) 10%, var(--card)), var(--card));
-    border: 1px solid color-mix(in srgb, var(--pine) 28%, var(--border));
-    border-inline-start: 5px solid var(--pine);
-    border-radius: 16px; padding: 14px 18px; margin-bottom: 12px; font-size: 0.92rem; box-shadow: var(--shadow);
-  }
-  .note {
-    font-size: 0.86rem; color: var(--muted); background: var(--route-bg);
-    border: 1px dashed var(--border); border-radius: 12px; padding: 12px 14px; margin: 12px 0 18px;
-  }
-  .map-embed { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
-  .map-embed iframe { width: 100%; height: 320px; border: 0; display: block; }
-  .routemap-day h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 10px; }
-
-  footer.bottom { text-align: center; font-size: 0.82rem; color: var(--muted); padding: 20px; }
-
-  #toast {
-    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(30px);
-    background: var(--teal-dark); color: #fff; padding: 12px 22px; border-radius: 12px;
-    font-size: 0.9rem; font-weight: 500; opacity: 0; pointer-events: none; transition: all .3s; z-index: 100;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-  }
-  html[data-theme="dark"] #toast { background: var(--teal); color: #06201f; }
-  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  @media (max-width: 480px) {
-    header.top h1 { font-size: 1.4rem; }
-    .item-card { flex-direction: column; gap: 10px; }
-    .item-time { align-self: flex-start; }
-  }
-  @media print {
-    nav.tabs, .header-actions, .search-wrap, .reset-btn, .countdown, #toast, header.top .mountains { display: none !important; }
-    section.page { display: block !important; page-break-after: always; }
-    .item-card, .check-card, table.costs, .map-embed, .tip-card { box-shadow: none; }
-    body { background: #fff; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="מדריך משפחתי אינטראקטיבי לבודפשט, מישקולץ, הרי הטטרה וברטיסלבה ביולי 2026">
+  <title>הטיול שלנו לסלובקיה · יולי 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Heebo:wght@600;700;800&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg:#f4f7f6;--surface:#fff;--surface-2:#edf5f3;--text:#17312e;--muted:#657b77;
+      --line:#dce8e5;--primary:#0f766e;--primary-2:#115e59;--accent:#ea6a47;--gold:#d8922b;
+      --success:#2f9567;--danger:#c7473c;--shadow:0 10px 30px rgba(19,62,56,.09);
+      --radius:18px;
+    }
+    html[data-theme="dark"] {
+      color-scheme:dark;--bg:#0c1514;--surface:#14211f;--surface-2:#1a2a27;--text:#ecf5f3;
+      --muted:#9bb0ab;--line:#29403c;--primary:#47c5b8;--primary-2:#75d9cf;--accent:#ff8c6c;
+      --gold:#edb65d;--success:#63c792;--danger:#ff8078;--shadow:0 12px 34px rgba(0,0,0,.3);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font-family:"Assistant",Arial,sans-serif;line-height:1.55}
+    button,a,input{font:inherit} button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:3px}
+    .hero{background:linear-gradient(145deg,#0b3d39 0%,#0f766e 65%,#1a9b8d 100%);color:#fff;padding:26px 18px 54px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;inset:auto -5% -52px;width:110%;height:110px;background:var(--bg);clip-path:polygon(0 72%,12% 44%,23% 69%,36% 25%,48% 70%,63% 38%,76% 72%,89% 48%,100% 68%,100% 100%,0 100%)}
+    .hero-inner{max-width:1080px;margin:auto;position:relative;z-index:2}.hero-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+    h1,h2,h3{font-family:"Heebo",Arial,sans-serif}.hero h1{font-size:clamp(1.65rem,4vw,2.7rem);margin:0 0 6px;line-height:1.15}.subtitle{margin:0;opacity:.9;max-width:720px}
+    .hero-actions{display:flex;gap:8px;flex:none}.icon-btn{width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:13px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}
+    .trip-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-size:.92rem}
+    .tabs-wrap{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .tabs{max-width:1080px;margin:auto;padding:10px 14px;display:flex;gap:7px;overflow:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+    .tab{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:transparent;color:var(--text);cursor:pointer;font-weight:600}.tab.active{background:var(--primary);border-color:var(--primary);color:#fff}
+    main{max-width:1080px;margin:auto;padding:24px 16px 80px}.page{display:none}.page.active{display:block;animation:fade .22s ease}@keyframes fade{from{opacity:0;transform:translateY(7px)}}
+    .section-title{font-size:1.45rem;margin:0 0 4px}.lead{color:var(--muted);margin:0 0 18px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px;box-shadow:var(--shadow)}
+    .overview-main{grid-column:span 8}.overview-side{grid-column:span 4}.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:var(--surface-2);border-radius:14px;padding:13px}.stat strong{display:block;font-family:"Roboto Mono",monospace;font-size:1.2rem;color:var(--primary)}
+    .route-list{margin:0;padding:0;list-style:none}.route-list li{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.route-list li:last-child{border:0}.route-list time{font-family:"Roboto Mono",monospace;color:var(--primary);font-weight:600}
+    .today-note{border-inline-start:5px solid var(--accent)}.quick-links{display:grid;gap:8px}.quick-links a{display:flex;justify-content:space-between;gap:10px;text-decoration:none;color:var(--text);background:var(--surface-2);padding:10px 12px;border-radius:12px}.quick-links a:hover{color:var(--primary)}
+    .day-card{margin-bottom:14px;padding:0;overflow:hidden}.day-head{padding:16px 18px;background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 14%,var(--surface)),var(--surface));display:flex;justify-content:space-between;gap:14px;align-items:center;border-bottom:1px solid var(--line)}.day-head h3{margin:0;font-size:1.16rem}.day-date{font-family:"Roboto Mono",monospace;font-size:.82rem;color:var(--primary)}
+    .timeline{padding:8px 18px 14px}.stop{display:grid;grid-template-columns:88px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}.stop:last-child{border:0}.stop-time{font-family:"Roboto Mono",monospace;font-size:.82rem;color:var(--primary);font-weight:600}.stop h4{margin:0 0 3px;font-size:1rem}.stop p{margin:0;color:var(--muted)}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.tag{font-size:.78rem;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+    .check-summary{display:flex;align-items:center;gap:14px;margin-bottom:16px}.progress{height:12px;background:var(--line);border-radius:999px;overflow:hidden;flex:1}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--success),var(--primary));transition:width .25s}.progress-text{font-family:"Roboto Mono",monospace;color:var(--muted);font-size:.85rem}
+    .checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.check-item{display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px}.check-item input{width:21px;height:21px;accent-color:var(--success);flex:none}.check-item.done{opacity:.58}.check-item.done .check-title{text-decoration:line-through}.check-title{font-weight:700}.check-desc{font-size:.88rem;color:var(--muted)}
+    .tip{border-inline-start:5px solid var(--gold);margin-bottom:12px}.tip h3{margin:0 0 4px;font-size:1rem}.tip p{margin:0;color:var(--muted)}
+    .toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}.secondary-btn{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:8px 12px;border-radius:11px;cursor:pointer}.secondary-btn:hover{border-color:var(--danger);color:var(--danger)}
+    footer{text-align:center;color:var(--muted);padding:22px;font-size:.85rem}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    #toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--primary-2);color:#fff;padding:10px 18px;border-radius:12px;transition:.25s;z-index:50}#toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:760px){.hero-top{display:block}.hero-actions{position:absolute;top:0;left:0}.overview-main,.overview-side{grid-column:1/-1}.checklist{grid-template-columns:1fr}.route-list li{grid-template-columns:92px 1fr}.stop{grid-template-columns:72px 1fr}.hero{padding-top:72px}}
+    @media print{.tabs-wrap,.hero-actions,.secondary-btn,#toast{display:none!important}.page{display:block!important}.card{box-shadow:none;break-inside:avoid}body{background:#fff}.hero{padding-bottom:25px}.hero:after{display:none}}
+  </style>
 </head>
 <body>
-
-<header class="top">
-  <div class="header-actions">
-    <button class="icon-btn" id="shareBtn" title="שתף">🔗</button>
-    <button class="icon-btn" id="printBtn" title="הדפסה / שמירה כ-PDF">🖨️</button>
-    <button class="icon-btn" id="themeBtn" title="מצב לילה">🌙</button>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div><h1>🏔️ הטיול המשפחתי שלנו לסלובקיה</h1><p class="subtitle">בודפשט · מישקולץ · קושיצה · הרי הטטרה הגבוהים · ברטיסלבה</p></div>
+      <div class="hero-actions">
+        <button class="icon-btn" id="shareBtn" aria-label="שיתוף המדריך" title="שיתוף">🔗</button>
+        <button class="icon-btn" id="printBtn" aria-label="הדפסה או שמירה כ-PDF" title="הדפסה">🖨️</button>
+        <button class="icon-btn" id="themeBtn" aria-label="החלפת מצב תצוגה" title="מצב לילה">🌙</button>
+      </div>
+    </div>
+    <div class="trip-meta"><span class="pill">📅 21–28 ביולי 2026</span><span class="pill">🚆 תחבורה ציבורית</span><span class="pill" id="countdown">⏳ מחשב ימים לטיול…</span></div>
   </div>
-  <h1><span>🏔️</span> טיול משפחתי לסלובקיה</h1>
-  <div class="sub">21–28 ביולי 2026 · תחבורה ציבורית בלבד · בודפשט · מילשקוץ · קושיצה → הטטרה → ברטיסלבה</div>
-  <div class="countdown" id="countdown">⏳</div>
-  <svg class="mountains" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M0,70 L0,42 L120,18 L240,46 L360,10 L500,48 L640,20 L780,52 L920,14 L1080,50 L1220,24 L1340,48 L1440,30 L1440,70 Z" fill="var(--bg)" opacity="0.55"/>
-    <path d="M0,70 L0,54 L160,34 L300,58 L440,30 L600,60 L760,36 L900,62 L1060,38 L1220,60 L1360,42 L1440,56 L1440,70 Z" fill="var(--bg)"/>
-  </svg>
 </header>
-
-<nav class="tabs" id="tabs">
-  <button data-page="overview" class="active">סקירה</button>
-  <button data-page="booking">רשימת הזמנות ✅</button>
-  <button data-page="packing">מה לארוז 🎒</button>
-  <button data-page="weather">מזג אוויר 🌦️</button>
-  <button data-page="budapest">בודפשט 🇭🇺</button>
-  <button data-page="miskolc">מילשקוץ ⚽</button>
-  <button data-page="day1">יום 1 · שישי</button>
-  <button data-page="day2">יום 2 · שבת</button>
-  <button data-page="day3">יום 3 · ראשון</button>
-  <button data-page="day4">יום 4 · שני</button>
-  <button data-page="day5">יום 5 · שלישי</button>
-  <button data-page="routemap">מפת המסלול 🗺️</button>
-  <button data-page="costs">עלויות ולינקים</button>
-  <button data-page="tips">טיפים</button>
-</nav>
-
+<nav class="tabs-wrap" aria-label="ניווט במדריך"><div class="tabs" role="tablist">
+  <button class="tab active" data-page="overview" role="tab">סקירה</button>
+  <button class="tab" data-page="itinerary" role="tab">מסלול יומי</button>
+  <button class="tab" data-page="booking" role="tab">הזמנות</button>
+  <button class="tab" data-page="packing" role="tab">אריזה</button>
+  <button class="tab" data-page="tips" role="tab">טיפים</button>
+</div></nav>
 <main>
-
-  <!-- OVERVIEW -->
-  <section class="page active" id="overview">
-    <h2 class="page-title">סקירה כללית</h2>
-    <div class="item-card" style="--accent: var(--teal);">
-      <div class="item-body">
-        <h3 class="activity-title">מסלול בקצרה</h3>
-        <p style="margin:0 0 10px;">
-          <b>21.7 (שלישי, ערב):</b> טיסה לבודפשט וצ'ק-אין<br>
-          <b>22.7 (רביעי):</b> יום כיף מלא בבודפשט — טירת בודה, הדנובה, מרחצאות Széchenyi ושייט ערב<br>
-          <b>23.7 (חמישי):</b> רכבת בצהריים למילשקוץ ומשחק כדורגל בערב<br>
-          <b>יום 1 (24.7, שישי):</b> רכבת ממילשקוץ לקושיצה ← FlixBus ← סטארי סמוקובץ' (הטטרה הגבוהים)<br>
-          <b>יום 2 (25.7, שבת):</b> רכבל לסקלנטה פלסו, קורקינטי הרים, Tatrabob, ערב ב-AquaCity Poprad<br>
-          <b>יום 3 (26.7, ראשון):</b> פוניקולר להרביאנוק ומפלי מים, שטרבסקה פלסו — Tatras Tower, (אופציונלי: רכבל סוליסקום) ושייט באגם<br>
-          <b>יום 4 (27.7, שני):</b> בוקר צמרות העצים באחלדקה (Bachledka), רכבת ישירה לברטיסלבה<br>
-          <b>יום 5 (28.7, שלישי):</b> יום האבא והנערים בברטיסלבה — עיר עתיקה, טירת ברטיסלבה, טירת דווין, UFO, טיסה 20:25
-        </p>
-        <p class="note">כל הפרטים המלאים, הלוגיסטיקה המדויקת, העלויות והלינקים הרשמיים נמצאים בלשוניות שלמעלה. אפשר לסמן ב"רשימת ההזמנות ✅" מה כבר הוזמן — הסימונים נשמרים אוטומטית במכשיר שלך.</p>
-      </div>
+  <section class="page active" id="overview" role="tabpanel">
+    <h2 class="section-title">הכול במקום אחד</h2><p class="lead">גרסה נקייה ומהירה לנייד, עם מסלול, משימות ופרטים שחשוב לבדוק לפני היציאה.</p>
+    <div class="grid">
+      <article class="card overview-main"><h3>המסלול בקצרה</h3><ol class="route-list">
+        <li><time>21–22.7</time><div><strong>בודפשט</strong><br><span>נחיתה, טירת בודה, הדנובה, מרחצאות ושייט ערב.</span></div></li>
+        <li><time>23.7</time><div><strong>מישקולץ</strong><br><span>רכבת מבודפשט ומשחק כדורגל בערב.</span></div></li>
+        <li><time>24.7</time><div><strong>קושיצה והטטרה</strong><br><span>מעבר הגבול, עצירה בקושיצה והגעה לנובי סמוקובץ.</span></div></li>
+        <li><time>25–26.7</time><div><strong>הרי הטטרה הגבוהים</strong><br><span>רכבלים, אגמים, מפלים, אדרנלין ו-AquaCity Poprad.</span></div></li>
+        <li><time>27–28.7</time><div><strong>ברטיסלבה</strong><br><span>Bachledka בדרך, עיר עתיקה, דווין, UFO וטיסה.</span></div></li>
+      </ol></article>
+      <aside class="overview-side">
+        <article class="card"><h3>תמונת מצב</h3><div class="stat-grid"><div class="stat"><strong>8</strong>ימים</div><div class="stat"><strong>4</strong>ערים מרכזיות</div><div class="stat"><strong>2</strong>ימי טבע מלאים</div><div class="stat"><strong>1</strong>פארק מים</div></div></article>
+        <article class="card today-note" style="margin-top:14px"><h3>חשוב במיוחד</h3><p>בהרים מזג האוויר יכול להשתנות במהירות. לצאת מוקדם, לקחת שכבה חמה ומעיל גשם, ולא להשאיר רכבלים לשעות אחר הצהריים.</p></article>
+      </aside>
     </div>
-    <div class="tip-card">💡 <b>איך משתפים?</b> לחצו על 🔗 למעלה כדי להעתיק קישור או לשלוח בוואטסאפ. אפשר גם לשמור את הדף כסימנייה בטלפון — הוא עובד גם אופליין.</div>
   </section>
 
-  <!-- BOOKING -->
-  <section class="page" id="booking">
-    <h2 class="page-title">רשימת הזמנות מראש</h2>
-    <div class="progress-label" id="progressLabel">0 מתוך 0 הושלמו</div>
-    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-    <button class="reset-btn" id="resetBtn">איפוס כל הסימונים</button>
-    <div id="checklist"></div>
+  <section class="page" id="itinerary" role="tabpanel"><h2 class="section-title">מסלול יומי</h2><p class="lead">המסלול בנוי כך שלא יהיו נסיעות הלוך־חזור מיותרות באזור הטטרה.</p><div id="days"></div></section>
+
+  <section class="page" id="booking" role="tabpanel"><div class="toolbar"><div><h2 class="section-title">הזמנות ובדיקות</h2><p class="lead" style="margin:0">הסימונים נשמרים אוטומטית במכשיר.</p></div><button class="secondary-btn" data-reset="booking">איפוס</button></div><div class="check-summary"><div class="progress"><span id="bookingBar"></span></div><span class="progress-text" id="bookingText"></span></div><div class="checklist" id="bookingList"></div></section>
+
+  <section class="page" id="packing" role="tabpanel"><div class="toolbar"><div><h2 class="section-title">רשימת אריזה</h2><p class="lead" style="margin:0">מותאמת להרים, לעיר ולפארק מים.</p></div><button class="secondary-btn" data-reset="packing">איפוס</button></div><div class="check-summary"><div class="progress"><span id="packingBar"></span></div><span class="progress-text" id="packingText"></span></div><div class="checklist" id="packingList"></div></section>
+
+  <section class="page" id="tips" role="tabpanel"><h2 class="section-title">טיפים שימושיים</h2><p class="lead">כמה החלטות קטנות שיעשו את הטיול קל יותר.</p>
+    <article class="card tip"><h3>🌦️ מזג אוויר בהרים</h3><p>בדקו תחזית בבוקר. במקרה של עננות נמוכה, החליפו בין יום הרכבלים ליום המפלים והאגמים.</p></article>
+    <article class="card tip"><h3>🎟️ הזמנות מוקדמות</h3><p>לתעדף רכבות בין־עירוניות, שייט ערב בבודפשט, מרחצאות, AquaCity ורכבלים מבוקשים.</p></article>
+    <article class="card tip"><h3>🚆 תחבורה</h3><p>שמרו צילומי מסך של הכרטיסים והלו״ז. בתחנות קטנות הקליטה יכולה להיות חלשה.</p></article>
+    <article class="card tip"><h3>🥾 מסלולים</h3><p>נעלי הליכה עם אחיזה עדיפות על נעלי ספורט חלקות. אחרי גשם השבילים סביב המפלים עלולים להיות רטובים.</p></article>
+    <article class="card tip"><h3>💧 מים ואוכל</h3><p>לצאת בכל בוקר עם מים וחטיף. באזורי הרכבלים המחירים גבוהים יותר ולעיתים יש תורים.</p></article>
   </section>
-
-  <!-- PACKING -->
-  <section class="page" id="packing">
-    <h2 class="page-title">מה לארוז 🎒</h2>
-    <div class="day-summary">רשימה לפי המסלול שלכם — הרים קרירים וגשומים לפרקים, פארק מים, וברטיסלבה החמה. סמנו מה ארזתם; הסימונים נשמרים במכשיר.</div>
-    <div class="progress-label" id="packLabel">0 מתוך 0 נארזו</div>
-    <div class="progress-wrap"><div class="progress-bar" id="packBar"></div></div>
-    <button class="reset-btn" id="packReset">איפוס רשימת האריזה</button>
-    <div id="packlist"></div>
-  </section>
-
-  <!-- WEATHER -->
-  <section class="page" id="weather">
-    <h2 class="page-title">מזג אוויר 🌦️</h2>
-    <div class="day-summary">תחזית חיה שמתעדכנת אוטומטית בכל פתיחת דף. תאריכי הטיול (24–28.7) מודגשים ויופיעו כאן ברגע שייכנסו לטווח התחזית — כ-16 יום לפני.</div>
-    <div id="weatherContent"><p class="note">טוען תחזית…</p></div>
-    <div class="tip-card" style="margin-top:14px;">🌡️ <b>ממוצע עונתי לסוף יולי (לגיבוי):</b> בעיירות הטטרה (~1,000 מ') ימים 18–23°C ולילות קרירים 8–12°C, עם סופות רעמים אחה"צ; <b>בגובה</b> (רכבלים/מגדלים) 5–12°C ורוחות. בברטיסלבה חם ויבש, 26–31°C. לכן שכבה חמה ומעיל גשם קל הם חובה גם בקיץ.</div>
-  </section>
-
-  <section class="page" id="budapest">
-    <h2 class="page-title">בודפשט 🇭🇺 — 21–22.7 (שלישי–רביעי)</h2>
-    <div class="day-summary">נחיתה בערב ה-21.7, ויום כיף מלא ב-22.7: צד בודה והנופים, שוק ולנגוש, הדנובה, מרחצאות Széchenyi ושייט ערב מרהיב.</div>
-    <div id="budapestlist"></div>
-  </section>
-
-  <section class="page" id="miskolc">
-    <h2 class="page-title">מילשקוץ ⚽ — 23.7 (חמישי)</h2>
-    <div class="day-summary">בוקר אחרון בבודפשט, רכבת בצהריים למילשקוץ, וערב של משחק כדורגל באווירה מקומית.</div>
-    <div id="miskolclist"></div>
-  </section>
-
-  <section class="page" id="day1">
-    <h2 class="page-title">יום שישי, 24.7 — ממילשקוץ לקושיצה והטטרה</h2>
-    <div class="day-summary">בוקר: רכבת חוצת-גבול ממילשקוץ לקושיצה. צהריים: סיור וארוחה בקושיצה, ואז FlixBus ישיר לסטארי סמוקובץ' — כאן מתחיל החלק הסלובקי.</div>
-    <div id="day1list"></div>
-  </section>
-
-  <section class="page" id="day2">
-    <h2 class="page-title">יום שבת, 25.7 — אקשן ואדרנלין</h2>
-    <div class="day-summary">רכבל, קורקינטי הרים, מגלשת Tatrabob וערב רטוב ב-AquaCity Poprad.</div>
-    <div id="day2list"></div>
-  </section>
-
-  <section class="page" id="day3">
-    <h2 class="page-title">יום ראשון, 26.7 — טבע, אגמים ומגדל התצפית</h2>
-    <div class="day-summary">פוניקולר ומפלי מים, ואז שטרבסקה פלסו: Tatras Tower, (אופציונלי) רכבל לבקתת סוליסקום, ושייט באגם האלפיני.</div>
-    <div id="day3list"></div>
-  </section>
-
-  <section class="page" id="day4">
-    <h2 class="page-title">יום שני, 27.7 — צמרות העצים ונסיעה לברטיסלבה</h2>
-    <div class="day-summary">בוקר מסלול צמרות העצים באחלדקה (Bachledka) ליד ז'דיאר, ואז רכבת ישירה מפופראד לברטיסלבה.</div>
-    <div id="day4list"></div>
-  </section>
-
-  <section class="page" id="day5">
-    <h2 class="page-title">יום שלישי, 28.7 — יום הטיסה (אבא והבנים)</h2>
-    <div class="day-summary">מאיה עוזבת בבוקר; האבא והנערים ממשיכים לבד: עיר עתיקה, טירת ברטיסלבה, טירת דווין, תצפית UFO, וטיסה ישירה מברטיסלבה ב-20:25.</div>
-    <div id="day5list"></div>
-  </section>
-
-  <!-- COSTS -->
-  <section class="page" id="costs" style="--accent: var(--amber);">
-    <h2 class="page-title">עלויות משוערות ואתרי הזמנה רשמיים</h2>
-    <div style="height:6px"></div>
-    <table class="costs" id="costsTable"></table>
-    <p class="note">העלויות הן הערכות בלבד לפי מחירי בסיס ידועים — מומלץ לבדוק מחיר סופי בעת ההזמנה בפועל.</p>
-  </section>
-
-  <!-- ROUTE MAP -->
-  <section class="page" id="routemap" style="--accent: var(--pine);">
-    <h2 class="page-title">מפת המסלול — יום אחרי יום</h2>
-    <p class="note">כל מפה מציגה את רצף התחנות של אותו יום. אם קו התחבורה הציבורית לא מוצג מדויק, המפה עדיין מראה את הכיוון והמרחק בין התחנות.</p>
-
-    <div class="routemap-day" style="margin-bottom:16px;">
-      <h3>🇭🇺 22.7 — יום הכיף בבודפשט</h3>
-      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Buda+Castle+Budapest&daddr=Fisherman%27s+Bastion+Budapest+to:Sz%C3%A9chenyi+Chain+Bridge+to:Great+Market+Hall+Budapest+to:Hungarian+Parliament+Building+to:Sz%C3%A9chenyi+Thermal+Bath&output=embed" loading="lazy"></iframe></div>
-    </div>
-
-    <div class="routemap-day" style="margin-bottom:16px;">
-      <h3>⚽ 23–24.7 — בודפשט ← מילשקוץ ← קושיצה</h3>
-      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Budapest+Keleti+railway+station&daddr=Miskolc-Tiszai+railway+station+to:Ko%C5%A1ice+train+station&output=embed" loading="lazy"></iframe></div>
-    </div>
-
-    <div class="routemap-day" style="margin-bottom:16px;">
-      <h3>🟠 יום 1, שישי — קושיצה ← נובי סמוקובץ'</h3>
-      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Ko%C5%A1ice+train+station&daddr=Hlavn%C3%A1+ulica+Ko%C5%A1ice+to:Nov%C3%BD+Smokovec+Slovakia+to:Smokoveck%C3%A1+kyselka&output=embed" loading="lazy"></iframe></div>
-    </div>
-
-    <div class="routemap-day" style="margin-bottom:16px;">
-      <h3>🔵 יום 2, שבת — טטרנסקה לומניצה: אדרנלין</h3>
-      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Tatransk%C3%A1+Lomnica+Slovakia&daddr=Skalnat%C3%A9+Pleso+cable+car+to:AquaCity+Poprad&output=embed" loading="lazy"></iframe></div>
-    </div>
-
-    <div class="routemap-day" style="margin-bottom:16px;">
-      <h3>🟢 יום 3, ראשון — הרביאנוק ← שטרבסקה פלסו</h3>
-      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Hrebienok+Vysok%C3%A9+Tatry&daddr=%C5%A0trbsk%C3%A9+Pleso+train+station+to:Tatras+Tower+%C5%A0trbsk%C3%A9+Pleso+to:Koliba+Patria+%C5%A0trbsk%C3%A9+Pleso&output=embed" loading="lazy"></iframe></div>
-    </div>
-
-    <div class="routemap-day" style="margin-bottom:16px;">
-      <h3>🟣 יום 4, שני — אחלדקה ← ברטיסלבה</h3>
-      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Nov%C3%BD+Smokovec+Slovakia&daddr=Bachledka+treetop+walk+%C5%BDdiar+to:Poprad-Tatry+train+station+to:Michalsk%C3%A1+3+Bratislava&output=embed" loading="lazy"></iframe></div>
-    </div>
-
-    <div class="routemap-day" style="margin-bottom:16px;">
-      <h3>🟦 יום 5, שלישי — האבא והנערים בברטיסלבה</h3>
-      <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Michalsk%C3%A1+3+Bratislava&daddr=Bratislava+Castle+to:Devín+Castle+Bratislava+to:UFO+observation+deck+Bratislava+to:Bratislava+Airport&output=embed" loading="lazy"></iframe></div>
-    </div>
-
-    <p class="note">💡 הטיפ הכי שימושי: כל כרטיס פעילות בימים 1–5 כולל גם כפתור 🗺️ מפה אישי, שפותח חיפוש מדויק של אותו מיקום ספציפי ב-Google Maps.</p>
-  </section>
-
-  <!-- TIPS -->
-  <section class="page" id="tips" style="--accent: var(--sky);">
-    <h2 class="page-title">טיפים לוגיסטיים</h2>
-    <div style="height:6px"></div>
-    <div class="tip-card">📱 <b>אפליקציות חובה לנייד:</b> IDOS או Ubian ללוחות זמנים של אוטובוסים ורכבות בזמן אמת; Bolt או Hopin להזמנת נסיעות קצרות בברטיסלבה (נוח כשנמאס להיסחב עם מזוודות).</div>
-    <div class="tip-card">🎫 <b>רכבת יום שני (27.7) לברטיסלבה:</b> הרכבות הישירות יוצאות כל שעה, כך שאין צורך במקום מוזמן מראש — אם הבוקר באחלדקה מתעכב, פשוט עולים על הרכבת הבאה. עדיין כדאי לקנות כרטיס אונליין מראש לנוחות ולוודא מקום ישיבה.</div>
-    <div class="tip-card">🧳 <b>מזוודות ביום 4:</b> חשוב לצאת לאחלדקה בבוקר בלי מזוודות (צ'ק-אאוט רק אחרי החזרה מהמסלול) — כך גם אם התוכנית מחליקה, אין לחץ של גרירת חפצים.</div>
-    <div class="tip-card">☀️ <b>מזג אוויר בהרים:</b> גם בקיץ בטטרה קריר וגשום לפרקים — כדאי שכבה חמה וברדס גשם קל בתיק, במיוחד לרכבלים ולמגדלי התצפית שבגובה.</div>
-  </section>
-
 </main>
-
-<footer class="bottom">🏔️ מדריך אינטראקטיבי · נוצר עבור הטיול המשפחתי לסלובקיה · הסימונים ברשימת ההזמנות נשמרים במכשיר זה</footer>
-
-<div id="toast"></div>
-
+<footer>נבנה במיוחד לטיול המשפחתי · הנתונים והמחירים דורשים אימות סמוך לנסיעה</footer><div id="toast" role="status" aria-live="polite"></div>
 <script>
-// ---------- DATA ----------
-const bookingItems = [
-  {id:'b1', urgent:false, title:'כרטיסי רכבת Tatran/IC: פופראד → ברטיסלבה (27.7)', desc:'ZSSK — 15–25€ לאדם. רכבות יוצאות כל שעה, אין צורך במקום מוזמן מראש, אבל שווה לקנות אונליין מראש לנוחות.', link:'https://www.zssk.sk/en/', linkLabel:'הזמנה ב-ZSSK'},
-  {id:'b2', urgent:true, title:'כרטיס FlixBus: קושיצה → סטארי סמוקובץ\' (24.7, יציאה 14:55)', desc:'8–15€ לאדם, נסיעה ישירה ללא החלפות.', link:'https://www.flixbus.com', linkLabel:'הזמנה ב-FlixBus'},
-  {id:'b3', urgent:false, title:'רכבל טטרנסקה לומניצה ← Skalnaté Pleso', desc:'110–130€ למשפחה. מומלץ להזמין מראש כדי לדלג על תורים בקיץ.', link:'https://www.gopass.travel/', linkLabel:'הזמנה ב-GoPass'},
-  {id:'b4', urgent:false, title:'כרטיסי AquaCity Poprad', desc:'90–110€ כניסה משפחתית. לבדוק את הנחת הכניסה מ-16:00 ואילך.', link:'https://aquacity.sk/en/', linkLabel:'אתר AquaCity'},
-  {id:'b5', urgent:false, title:'אישור לינה — Nový Smokovec', desc:'לוודא הזמנה סופית וכתובת מדויקת (Nový Smokovec 32) לפני הנסיעה.', link:'', linkLabel:''},
-  {id:'b6', urgent:false, title:'אישור לינה — Palace Apartments, Michalská 3, ברטיסלבה', desc:'מיקום מצוין בלב העיר העתיקה, ליד שער מיכאל — הליכה לכל מקום. לתאם עם המארח שמירת מזוודות ביום 5 עד אחה"צ.', link:'', linkLabel:''},
-  {id:'b7', urgent:false, title:'כרטיסי מסלול צמרות העצים — Bachledka', desc:'~15–20€ למבוגר, הנחת נוער. שווה לבדוק אונליין מראש בקיץ בגלל ביקוש.', link:'https://www.bachledka.sk/', linkLabel:'אתר Bachledka'},
-  {id:'b8', urgent:false, title:'כרטיסי Tatras Tower (שטרבסקה פלסו)', desc:'~14–18€ למבוגר, הנחת נוער. אפשר כרטיס משולב עם רכבל סוליסקום.', link:'https://vezasnov.sk/', linkLabel:'אתר Tatras Tower'},
-  {id:'b9', urgent:false, title:'תצפית UFO בברטיסלבה', desc:'10€ מבוגר / 7€ נוער. שווה לבדוק כרטיס מראש כדי לדלג על תור למעלית.', link:'', linkLabel:''},
-  {id:'b10', urgent:false, title:'טירת דווין (Devín Castle)', desc:'6€ מבוגר / 3€ נוער. קנייה בקופה בכניסה, אין צורך בהזמנה מראש.', link:'', linkLabel:''},
-  {id:'b11', urgent:true, title:'הסעה לשדה התעופה ברטיסלבה (28.7, טיסה 20:25)', desc:'טיסה פנים-אירופית בתוך שנגן וכבודת יד בלבד — מספיק להגיע ~1.5 שעות לפני. אוטובוס ישיר קו 61 מהתחנה המרכזית (~25 דק\') או מונית/Bolt מהעיר העתיקה (~20 דק\'). לצאת מהעיר כ-18:20 כדי להגיע ~18:55. מומלץ צ\'ק-אין אונליין וכרטיס עלייה בטלפון מראש.', link:'', linkLabel:''},
-  {id:'b12', urgent:false, title:'משחק הכדורגל במילשקוץ (23.7) — כרטיסים נרכשו ✔', desc:'הכרטיסים כבר ביד. נותר לבדוק את שעת המשחק ופתיחת השערים כשתתפרסם (בדרך כלל כמה ימים לפני) — ולתאם לפיה את תזמון הערב והארוחה. לאמת גם את שער הכניסה ומיקום האצטדיון.', link:'https://dvtk.eu/', linkLabel:'אתר DVTK'},
-  {id:'b13', urgent:false, title:'רכבת בודפשט → מילשקוץ (23.7, יציאה 12:30)', desc:'MÁV — ~4,000–7,000 HUF לאדם. רכבות ישירות מ-Budapest-Keleti, ~2 שעות. שווה לקנות אונליין מראש.', link:'https://www.mavcsoport.hu/en', linkLabel:'הזמנה ב-MÁV'},
-  {id:'b14', urgent:false, title:'רכבת מילשקוץ → קושיצה (24.7, יציאה 10:30)', desc:'רכבת חוצת-גבול ~1.5 שעות, ~10–15 € לאדם — תחילת החלק הסלובקי. לבדוק שעה מדויקת יום לפני.', link:'https://www.mavcsoport.hu/en', linkLabel:'MÁV / ZSSK'},
-  {id:'b15', urgent:false, title:'לינה בבודפשט (2 לילות: 21–22.7)', desc:'מומלץ מרכזי (סביב Deák tér / צד פשט) להליכה נוחה לאתרים ולתחבורה.', link:'', linkLabel:''},
-  {id:'b16', urgent:false, title:'לינה במילשקוץ (23.7)', desc:'לילה אחד — קרוב לאצטדיון או למרכז/תחנת הרכבת, לנוחות בוקר היציאה לקושיצה.', link:'', linkLabel:''},
+const itinerary=[
+ {date:'21–22.7',title:'בודפשט — פתיחה עירונית',stops:[
+  ['21.7 · ערב','נחיתה וצ׳ק-אין','אוטובוס 100E או מונית למרכז העיר. ארוחת ערב קלה ליד המלון.',['לינה: מרכז פשט']],
+  ['22.7 · 09:00','טירת בודה ומצודת הדייגים','עלייה לגבעת הטירה, נוף לדנובה ולפרלמנט.',['הליכה','נוף']],
+  ['22.7 · 12:30','השוק המרכזי','ארוחת צהריים וזמן חופשי.',['אוכל']],
+  ['22.7 · 15:30','מרחצאות Széchenyi','להביא בגד ים, כפכפים ומגבת.',['להזמין מראש']],
+  ['22.7 · 20:00','שייט ערב על הדנובה','להגיע לרציף לפחות 20 דקות לפני.',['שיא היום']]]},
+ {date:'23.7',title:'מישקולץ — רכבת וכדורגל',stops:[
+  ['12:30','רכבת מבודפשט','יציאה מ-Budapest Keleti והגעה ל-Miskolc Tiszai.',['כרטיס מראש']],
+  ['אחה״צ','צ׳ק-אין וארוחה','התארגנות ומעבר מוקדם לאצטדיון.',['לילה אחד']],
+  ['ערב','משחק DVTK','לוודא שעת פתיחת שערים ומיקום הכניסה.',['כרטיסים נרכשו']]]},
+ {date:'24.7',title:'מישקולץ → קושיצה → נובי סמוקובץ',stops:[
+  ['בוקר','רכבת לקושיצה','לבדוק יום קודם את שעת הרכבת חוצת הגבול.',['דרכון','רכבת']],
+  ['צהריים','קושיצה','ארוחה קצרה וסיבוב במרכז ההיסטורי.',['בלי מזוודות כבדות']],
+  ['אחה״צ','המשך להרי הטטרה','FlixBus או רכבת דרך פופראד; צ׳ק-אין בנובי סמוקובץ.',['בסיס: Nový Smokovec']]]},
+ {date:'25.7',title:'טטרה — רכבלים ואדרנלין',stops:[
+  ['08:30','טטרנסקה לומניצה','רכבל מוקדם ל-Skalnaté pleso לפני העננות.',['לצאת מוקדם']],
+  ['צהריים','אטרקציות אדרנלין','Tatrabob וקורקינטי הרים בהתאם למזג האוויר.',['לבדוק גיל/גובה']],
+  ['ערב','AquaCity Poprad','נסיעה קצרה יחסית מהמלון, רחצה וארוחת ערב.',['בגד ים']]]},
+ {date:'26.7',title:'מפלים ושטרבסקה פלסו',stops:[
+  ['08:30','Hrebienok','פוניקולר מסטארי סמוקובץ והליכה למפלי Studený potok.',['נעלי הליכה']],
+  ['צהריים','Štrbské Pleso','הליכה סביב האגם ו-Tatras Tower.',['אגם','תצפית']],
+  ['אחה״צ','אפשרות לרכבל Solisko','רק בראות טובה ובהתאם לכוחות.',['אופציונלי']]]},
+ {date:'27–28.7',title:'Bachledka וברטיסלבה',stops:[
+  ['27.7 · בוקר','Bachledka Treetop Walk','יציאה מוקדמת כדי להספיק לרכבת הארוכה מערבה.',['לוגיסטיקה רגישה']],
+  ['27.7 · אחה״צ','רכבת לברטיסלבה','נסיעה מפופראד וצ׳ק-אין במרכז.',['רכבת ישירה']],
+  ['28.7 · בוקר','העיר העתיקה והטירה','מסלול רגלי רגוע במרכז.',['חינם ברובו']],
+  ['28.7 · צהריים','טירת דווין ו-UFO','לבחור לפי זמן ומזג האוויר.',['טיסה 20:25']],
+  ['18:20','יציאה לשדה התעופה','להגיע סביב 18:50–19:00 עם צ׳ק-אין מקוון.',['לא לאחר']]]}
 ];
-
-const days = {
-  budapest: [
-    {time:'21.7 · ערב', place:'שדה התעופה בודפשט (BUD) → מרכז העיר', activity:'נחיתה, הסעה וצ\'ק-אין', route:'נחיתה בבודפשט. הכי נוח: אוטובוס 100E (Airport Express) ישיר לתחנת Deák Ferenc tér במרכז (~40 דק\'), או Bolt/מונית (~30 דק\'). צ\'ק-אין למלון וארוחת ערב קלה בסביבה.', cost:'2,200 HUF (100E) לאדם / ~9,000 HUF מונית', link:'', linkLabel:'', mapQuery:'Budapest Ferenc Liszt International Airport'},
-    {time:'22.7 · 09:00', place:'טירת בודה ומצודת הדייגים', activity:'בוקר בצד בודה — הנופים הכי יפים', route:'עלייה בפוניקולר ההיסטורי Budavári Sikló (או הליכה) לגבעת הטירה. טירת בודה, מצודת הדייגים (Halászbástya) הלבנה עם הצריחים וכנסיית מתיאש — נוף פנורמי על הדנובה והפרלמנט.', cost:'פוניקולר ~1,500 HUF; מצודה כניסה מזערית', link:'', linkLabel:'', mapQuery:'Fisherman\'s Bastion Budapest'},
-    {time:'22.7 · 11:30', place:'גשר השרשראות', activity:'חציית הדנובה לצד פשט', route:'ירידה מגבעת הטירה וחציית גשר השרשראות המפורסם (Széchenyi Lánchíd) ברגל אל צד פשט.', cost:'חינם', link:'', linkLabel:'', mapQuery:'Széchenyi Chain Bridge Budapest'},
-    {time:'22.7 · 12:30', place:'השוק המרכזי הגדול', activity:'צהריים — לנגוש וסטריט פוד', route:'שוק מקורה ענק ומרשים. בקומה העליונה דוכני אוכל: לנגוש (בצק מטוגן), גולאש ונקניקיות — כיף גדול לנערים; קומת מזכרות ותבלינים למטה.', cost:'~4,000–6,000 HUF לאדם', link:'', linkLabel:'', mapQuery:'Great Market Hall Budapest'},
-    {time:'22.7 · 14:00', place:'פרלמנט + הנעליים על גדת הדנובה', activity:'ציוני דרך על הנהר', route:'הליכה לאורך הדנובה אל בניין הפרלמנט המרשים (מבחוץ; סיור פנימי אפשרי בהזמנה מראש) ואנדרטת "הנעליים על גדת הדנובה" המרגשת.', cost:'חינם (סיור פנימי ~10,000 HUF)', link:'', linkLabel:'', mapQuery:'Hungarian Parliament Building'},
-    {time:'22.7 · 15:30', place:'מרחצאות Széchenyi', activity:'⭐ מרחצאות תרמיים — כיף משפחתי', route:'מטרו הצהוב (קו M1 ההיסטורי) לכיכר הגיבורים ולפארק העיר. רחצה בבריכות התרמיות החמות בחוץ — חוויה בודפשטית קלאסית שכולם אוהבים. להביא בגד ים ומגבת.', cost:'~10,000–12,000 HUF כניסה', link:'https://www.szechenyibath.hu/', linkLabel:'אתר Széchenyi', mapQuery:'Széchenyi Thermal Bath Budapest'},
-    {time:'22.7 · 18:00', place:'כיכר הגיבורים ופארק העיר', activity:'תצפית וזמן חופשי', route:'כיכר הגיבורים המונומנטלית וטירת Vajdahunyad הרומנטית שלידה, זמן חופשי לנוח לפני הערב.', cost:'חינם', link:'', linkLabel:'', mapQuery:'Heroes\' Square Budapest'},
-    {time:'22.7 · 20:00', place:'שייט ערב על הדנובה', activity:'⭐ שיא היום — בודפשט מוארת', route:'שייט ערב על הדנובה כשהפרלמנט, הטירה והגשרים מוארים — החוויה הכי מרשימה בעיר. שייט של כשעה, לעיתים עם משקה כלול. מומלץ להזמין מראש בקיץ.', cost:'~5,000–9,000 HUF לאדם', link:'', linkLabel:'', mapQuery:'Danube evening cruise Budapest'},
-  ],
-  miskolc: [
-    {time:'23.7 · 09:00–11:30', place:'בודפשט — בוקר אחרון', activity:'בוקר חופשי + צ\'ק-אאוט', route:'ארוחת בוקר וזמן קצר אחרון בעיר (למשל שדרת אנדראשי או קפה), צ\'ק-אאוט, ומעבר לתחנת הרכבת המזרחית Budapest-Keleti.', cost:'—', link:'', linkLabel:'', mapQuery:'Budapest Keleti railway station'},
-    {time:'12:30–~14:40', place:'רכבת בודפשט → מילשקוץ', activity:'נסיעה למילשקוץ', route:'רכבת ישירה מ-Budapest-Keleti לתחנת Miskolc-Tiszai (~2 שעות), על פני המישור ההונגרי.', cost:'~4,000–7,000 HUF לאדם', link:'https://www.mavcsoport.hu/en', linkLabel:'MÁV — רכבות הונגריה', mapQuery:'Miskolc-Tiszai railway station'},
-    {time:'~15:00–17:30', place:'מילשקוץ — צ\'ק-אין', activity:'הגעה, התארגנות וארוחה', route:'צ\'ק-אין ללינה במילשקוץ, מנוחה קצרה וארוחה מוקדמת לפני המשחק.', cost:'—', link:'', linkLabel:'', mapQuery:'Miskolc Hungary'},
-    {time:'23.7 · ערב', place:'אצטדיון DVTK, מילשקוץ', activity:'⚽ משחק הכדורגל', route:'הגעה לאצטדיון (ככל הנראה DVTK Stadion של Diósgyőri VTK) לצפייה במשחק באווירת אוהדים מקומית. לוודא מראש את שעת פתיחת השערים ולהגיע ~45–60 דק\' לפני. חזרה ללינה אחרי המשחק.', cost:'לפי כרטיסים', link:'https://dvtk.eu/', linkLabel:'אתר DVTK', mapQuery:'DVTK Stadion Miskolc'},
-  ],
-  day1: [
-    {time:'24.7 · 08:30–10:00', place:'מילשקוץ', activity:'בוקר וצ\'ק-אאוט', route:'ארוחת בוקר, צ\'ק-אאוט מהלינה במילשקוץ, ומעבר לתחנת הרכבת Miskolc-Tiszai.', cost:'—', link:'', linkLabel:'', mapQuery:'Miskolc-Tiszai railway station'},
-    {time:'10:30–~12:00', place:'רכבת מילשקוץ → קושיצה', activity:'מעבר לסלובקיה — כאן מתחיל הטיול', route:'רכבת ישירה חוצת-גבול הונגריה→סלובקיה (אזור שנגן, בלי ביקורת דרכונים), כ-1.5 שעות. הגעה לקושיצה סביב 12:00, וישר להפקדת המזוודות ותחילת התוכנית.', cost:'~10–15 € לאדם', link:'', linkLabel:'', mapQuery:'Miskolc to Košice train'},
-    {time:'12:00–12:30', place:'תחנת הרכבת קושיצה', activity:'הפקדת מזוודות', route:'הליכה ישירה לעמדת שמירת החפצים (Úschovňa zavazadiel) בתחנה המרכזית, הצמודה לתחנת האוטובוסים.', cost:'5–10 €', link:'', linkLabel:'', mapQuery:'Košice railway station'},
-    {time:'12:30–14:15', place:'מדרחוב Hlavná ulica, קושיצה', activity:'סיור מדרחוב וארוחת צהריים', route:'חציית הפארק העירוני (~10 דק\') מהתחנה, הגעה למדרחוב, קתדרלת אליזבת הקדושה והמזרקה המנגנת. ארוחת צהריים קלה (למשל Republika Východu).', cost:'40–60 € (ארוחה)', link:'', linkLabel:'', mapQuery:'Hlavná ulica Košice'},
-    {time:'14:15–14:55', place:'תחנת הרכבת קושיצה', activity:'חזרה ועלייה לפליקסבאס', route:'הליכה חזרה (~10 דק\'), איסוף המזוודות, התייצבות ברציף לפחות 20 דק\' לפני היציאה.', cost:'כלול בכרטיס', link:'', linkLabel:'', mapQuery:'Košice bus station Autobusová stanica'},
-    {time:'14:55–17:00', place:'FlixBus: קושיצה → סטארי סמוקובץ\'', activity:'נסיעה ישירה לטטרה', route:'FlixBus ישיר, ללא החלפות, נחיתה ישירה בתחנת סטארי סמוקובץ\'.', cost:'8–15 €/אדם', link:'https://www.flixbus.com', linkLabel:'FlixBus — הזמנה', mapQuery:''},
-    {time:'17:00–18:30', place:'נובי סמוקובץ\' (Nový Smokovec)', activity:'הגעה והתארגנות', route:'הליכה לדירה (Nový Smokovec 32) או תחנה אחת ב-TEŽ, קבלת מפתח מהמארח, הצטיידות בסופרמרקט מקומי.', cost:'חינם', link:'', linkLabel:'', mapQuery:'Nový Smokovec Slovakia'},
-    {time:'18:30–20:30', place:'Smokovecká kyselka', activity:'מעיין טבעי + ארוחת ערב', route:'מסלול הליכה קצר וקסום ליער אל המעיין בעל טעם פחמתי ייחודי (מומלץ בקבוק ריק). המשך לארוחת ערב משפחתית ראשונה בעיירה.', cost:'50–70 € (ארוחה)', link:'', linkLabel:'', mapQuery:'Smokovecká kyselka Nový Smokovec'},
-  ],
-  day2: [
-    {time:'09:00–11:30', place:'Tatranská Lomnica → Skalnaté Pleso', activity:'רכבל לאגם ההררי', route:'רכבת TEŽ לטטרנסקה לומניצה (~15 דק\'), הליכה 10 דק\' לתחנה התחתונה, רכבל דרך תחנת הביניים Štart עד לאגם בגובה 1,751 מ\'. הליכה סביב האגם ותצפית פנורמית.', cost:'110–130 € (רכבל משפחתי)', link:'https://www.gopass.travel/', linkLabel:'GoPass — הזמנה', mapQuery:'Skalnaté Pleso cable car Tatranská Lomnica'},
-    {time:'11:30–13:00', place:'Štart (תחנת ביניים)', activity:'ירידה בקורקינטים אלפיניים', route:'ירידה ברכבל תחנה אחת בלבד ל-Štart, השכרת קורקינטים אלפיניים עם צמיגים רחבים ובלמים חזקים, ירידה במסלול אספלט ייעודי של כ-3 ק"מ.', cost:'40–50 € (4 קורקינטים)', link:'https://www.vt.sk/hory/letne-atrakcie/kary-a-kolobezky', linkLabel:'מידע על הקורקינטים', mapQuery:'Štart cable car station Tatranská Lomnica'},
-    {time:'13:00–14:00', place:'טטרנסקה לומניצה', activity:'מגלשת הרים Tatrabob + ארוחת צהריים', route:'הליכה ~5 דק\', רכישת כרטיסים לפי סיבובים, גלישה במסלול מפותל עם בלם יד. המשך לארוחת צהריים במרכז העיירה.', cost:'20–30 € מגלשות + ~50 € ארוחה', link:'http://www.tatrabob.sk/', linkLabel:'אתר Tatrabob', mapQuery:'Tatrabob Tatranská Lomnica'},
-    {time:'14:00–15:30', place:'נובי סמוקובץ\'', activity:'חזרה לדירה למנוחה קלה', route:'רכבת TEŽ חזרה, טעינת טלפונים והחלפה לבגדי ים לקראת פארק המים.', cost:'חינם', link:'', linkLabel:'', mapQuery:'Nový Smokovec Slovakia'},
-    {time:'15:30–20:00', place:'AquaCity Poprad', activity:'ערב רטוב בפארק המים', route:'TEŽ לתחנת Poprad-Tatry (~22 דק\'), מונית קצרה/הליכה לפארק המים. מומלץ כרטיס אחה"צ (החל מ-16:00 מוזל). מגלשות מים, בריכת לייזר ובריכות תרמיות חמות.', cost:'90–110 € כניסה + ~40 € אוכל', link:'https://aquacity.sk/', linkLabel:'אתר AquaCity — הזמנה', mapQuery:'AquaCity Poprad'},
-  ],
-  day3: [
-    {time:'09:00–12:30', place:'Hrebienok', activity:'פוניקולר + מפלי המים הקרים', route:'נסיעת פוניקולר חווייתית (7 דק\') לפסגת Hrebienok (1,285 מ\'), מסלול הליכה ירוק/מוצל למפלי Studeného potoka, עצירה בבקתת Bilíkova או Rainerova chata לשוקו חם.', cost:'40–50 € (פוניקולר משפחתי)', link:'', linkLabel:'', mapQuery:'Hrebienok funicular Vysoké Tatry'},
-    {time:'12:30–13:00', place:'Štrbské Pleso', activity:'רכבת TEŽ לתחנה הגבוהה ביותר', route:'נסיעה נופית (~40 דק\') לתחנה הגבוהה ביותר בטטרה.', cost:'יורו בודדים לרכבת', link:'', linkLabel:'', mapQuery:'Štrbské Pleso train station'},
-    {time:'13:00–14:00', place:'Tatras Tower, שטרבסקה פלסו', activity:'מגדל התצפית עם רשת ורצפת זכוכית', route:'הליכה של 15–20 דק\' מהתחנה (דרך אזור מקפצות הסקי). מגדל בגובה 53 מ\', רשת הליכה תלויה 43 מ\' מעל הקרקע, גשר זכוכית בגובה כמעט 50 מ\', ומגלשה יבשה של 61 מ\' לירידה (בתוספת תשלום).', cost:'~14–18 € למבוגר, הנחת נוער', link:'https://vezasnov.sk/', linkLabel:'Tatras Tower — הזמנה', mapQuery:'Tatras Tower Štrbské Pleso'},
-    {time:'14:00–14:30', place:'Chata pod Soliskom (1,840 מ\')', activity:'⭐ אופציונלי (רק אם יש זמן): רכבל לבקתה', route:'אם אין לחץ על הלו"ז — רכבל לנוף פנורמי נוסף. יש כרטיס משולב עם Tatras Tower. אם היום כבר נדחק — מדלגים בלי לפגוע בהמשך.', cost:'~15–20 € למבוגר (Solisko Expres)', link:'', linkLabel:'', mapQuery:'Chata pod Soliskom Štrbské Pleso'},
-    {time:'14:30–15:30', place:'Koliba Patria, שטרבסקה פלסו', activity:'ארוחת צהריים מסורתית', route:'מסעדה סלובקית מסורתית עם נוף לאגם — כפתורי גבינת כבשים או מרק שום בלחם.', cost:'60–80 € ארוחה', link:'', linkLabel:'', mapQuery:'Koliba Patria Štrbské Pleso'},
-    {time:'15:30–17:30', place:'אגם Štrbské Pleso', activity:'שייט וטיול סביב האגם', route:'שכירת סירת משוטים מרציף היסטורי (130+ שנה) לשעה, הליכה קלה סביב האגם (~45 דק\').', cost:'25–35 € לשכירת סירה לשעה', link:'', linkLabel:'', mapQuery:'Štrbské Pleso lake boat rental'},
-    {time:'17:30–19:30', place:'נובי סמוקובץ\'', activity:'חזרה לדירה וארוחת ערב מסכמת', route:'TEŽ חזרה, זמן חופשי לקניות אחרונות ואריזה ראשונית, ארוחת ערב חגיגית לסיכום החלק ההררי (למשל מסעדת Soul).', cost:'70–100 €', link:'', linkLabel:'', mapQuery:'Nový Smokovec Slovakia'},
-  ],
-  day4: [
-    {time:'07:30–08:00', place:'נובי סמוקובץ\' (הדירה)', activity:'התארגנות בוקר (בלי מזוודות)', route:'ארוזה חלקית מהערב הקודם, תיקים ליד הדלת. יוצאים לבוקר של אחלדקה בלי לגרור מזוודות — צ\'ק-אאוט רק אחרי החזרה.', cost:'—', link:'', linkLabel:'', mapQuery:''},
-    {time:'08:00–08:30', place:'אוטובוס A15/802: נובי סמוקובץ\' → Bachledova dolina', activity:'אוטובוס ישיר לז\'דיאר, בלי החלפות', route:'אוטובוס ישיר אחד היוצא מסטארי/נובי סמוקובץ\' ועובר דרך טטרנסקה לומניצה עד לתחנת "Ždiar, Rázc. Bachledova dolina" ממש ליד הגונדולה — אין צורך ב-TEŽ או בהחלפה.', cost:'2–4 €', link:'', linkLabel:'', mapQuery:'Bachledova dolina bus stop Ždiar'},
-    {time:'08:30–10:15', place:'Bachledka (Ždiar)', activity:'מסלול צמרות העצים', route:'גונדולה (7 דק\') לתחילת המסלול, הליכה בין צמרות העצים לאורך כ-1.2 ק"מ, מגדל תצפית עם מגלשה יבשה בפנים, נוף על גבול פולין-סלובקיה. גונדולה חזרה למטה.', cost:'~15–20 € למבוגר, הנחת נוער', link:'https://www.bachledka.sk/', linkLabel:'אתר Bachledka — הזמנה', mapQuery:'Bachledka treetop walk Ždiar'},
-    {time:'10:15–10:45', place:'נובי סמוקובץ\'', activity:'אוטובוס חזרה ישיר', route:'אותו קו אוטובוס בחזרה, ישר לנובי סמוקובץ\' בלי החלפות.', cost:'2–4 €', link:'', linkLabel:'', mapQuery:'Nový Smokovec Slovakia'},
-    {time:'10:45–11:30', place:'הדירה, נובי סמוקובץ\'', activity:'צ\'ק-אאוט ואיסוף מזוודות', route:'חזרה לדירה, איסוף החפצים והתארגנות אחרונה.', cost:'—', link:'', linkLabel:'', mapQuery:''},
-    {time:'11:30–12:00', place:'Poprad-Tatry', activity:'נסיעה לתחנת פופראד', route:'TEŽ עם המזוודות אל תחנת הרכבת המרכזית Poprad-Tatry.', cost:'יורו בודדים', link:'', linkLabel:'', mapQuery:'Poprad-Tatry train station'},
-    {time:'~12:30–16:40', place:'Bratislava hl.st.', activity:'רכבת ישירה Tatran/IC לברטיסלבה', route:'רכבות יוצאות בתדירות של פעם בשעה ולוקחות כ-4 שעות ו-10 דקות, עם קרון מסעדה. אין צורך להיצמד לשעה מדויקת: אם הבוקר מחליק, פשוט עולים על הרכבת הבאה שעה אחרי.', cost:'15–25 € לאדם (מחלקה 2)', link:'https://www.zssk.sk/', linkLabel:'ZSSK — הזמנה', mapQuery:'Bratislava hlavná stanica'},
-    {time:'16:40–19:00', place:'העיר העתיקה + טירת ברטיסלבה', activity:'צ\'ק-אין וסיור ערב', route:'חשמלית עירונית קצרה מהתחנה למלון. צ\'ק-אין, ואז יציאה ברגל לסיור בסמטאות העיר העתיקה ועלייה לטירת ברטיסלבה לתצפית שקיעה.', cost:'~1–1.5 € לנסיעת חשמלית לאדם', link:'', linkLabel:'', mapQuery:'Bratislava Castle old town'},
-  ],
-  day5: [
-    {time:'08:30–09:00', place:'Palace Apartments, Michalská 3', activity:'צ\'ק-אאוט + שמירת מזוודות', route:'לתאם מראש עם המארח השארת המזוודות בדירה עד אחה"צ (מקובל בדירות אירוח קצרות) — כך לא צריך לסחוב אותן כל היום. הדירה ממוקמת ממש בלב העיר העתיקה, ליד שער מיכאל.', cost:'—', link:'', linkLabel:'', mapQuery:'Michalská 3 Bratislava'},
-    {time:'09:00–10:00', place:'שער מיכאל והכיכר הראשית', activity:'סיור קצר בעיר העתיקה', route:'הליכה של דקות בודדות מהדירה: שער מיכאל (Michalská brána), הכיכר הראשית Hlavné námestie וארמון הנשיא. קל לניווט עצמאי — הכל בטווח הליכה קצר אחד מהשני.', cost:'חינם', link:'', linkLabel:'', mapQuery:'Michael\'s Gate Bratislava Old Town'},
-    {time:'10:00–11:30', place:'טירת ברטיסלבה', activity:'סיור בטירה', route:'הליכה עולה מהעיר העתיקה (כ-15–20 דק\', שביל מסומן בעלייה מתונה). סיור בחצר הפנימית, בחומות ובמרפסת התצפית על הדנובה.', cost:'—', link:'', linkLabel:'', mapQuery:'Bratislava Castle'},
-    {time:'11:30–12:30', place:'העיר העתיקה', activity:'ארוחת צהריים', route:'ירידה חזרה לעיר העתיקה, ארוחה במסעדה במדרחוב (למשל סביב הכיכר הראשית).', cost:'40–60 €', link:'', linkLabel:'', mapQuery:'Bratislava Old Town restaurants'},
-    {time:'12:30–13:00', place:'אוטובוס קו 29 לטירת דווין', activity:'נסיעה', route:'עלייה על קו 29 מתחנה קרובה (למשל Most SNP), נסיעה ישירה של כ-20 דקות לרובע דווין.', cost:'1–1.5 € לאדם', link:'', linkLabel:'', mapQuery:'Most SNP bus stop Bratislava'},
-    {time:'13:00–14:30', place:'טירת דווין (Devín Castle)', activity:'ביקור בטירה', route:'חורבות טירה דרמטיות על צוק מעל מפגש נהרות הדנובה והמורבה, עם נוף לגבול אוסטריה.', cost:'6 € מבוגר / 3 € נוער', link:'', linkLabel:'', mapQuery:'Devín Castle Bratislava'},
-    {time:'14:30–15:00', place:'חזרה למרכז', activity:'אוטובוס קו 29', route:'אותו קו בחזרה למרכז העיר.', cost:'1–1.5 € לאדם', link:'', linkLabel:'', mapQuery:'Bratislava city center'},
-    {time:'15:00–16:00', place:'גשר SNP ותצפית UFO', activity:'תצפית פנורמית', route:'הליכה קלה על גשר SNP ועלייה במעלית המהירה לראש מגדל התצפית (החללית) לנוף פנורמי על ברטיסלבה והדנובה.', cost:'10 € מבוגר / 7 € נוער', link:'', linkLabel:'', mapQuery:'UFO observation deck Bratislava SNP Bridge'},
-    {time:'16:00–18:00', place:'Palace Apartments, Michalská 3', activity:'איסוף חפצים + ארוחת ערב נינוחה', route:'איסוף כבודת היד מהדירה, ואז ארוחת ערב מוקדמת ורגועה במדרחוב או סיבוב אחרון בעיר העתיקה — יש זמן, אין לחץ.', cost:'40–60 € (ארוחה)', link:'', linkLabel:'', mapQuery:'Bratislava Old Town restaurants'},
-    {time:'18:20–18:55', place:'שדה התעופה ברטיסלבה', activity:'נסיעה לשדה התעופה', route:'אוטובוס ישיר קו 61 מהתחנה המרכזית (כ-25 דק\'), או מונית/Bolt ישירות מהעיר העתיקה (~20 דק\').', cost:'~1.5 € לאדם (אוטובוס) / ~15–20 € (מונית)', link:'', linkLabel:'', mapQuery:'Bratislava Airport'},
-    {time:'~18:55–20:25', place:'שדה התעופה ברטיסלבה (BTS)', activity:'צ\'ק-אין, ביטחון והמתנה לטיסה', route:'טיסה פנים-אירופית בתוך שנגן (אין ביקורת דרכונים) וכבודת יד בלבד — שעה וחצי לפני מספיקה בהחלט ב-BTS הקטן והמהיר. מומלץ צ\'ק-אין אונליין וכרטיס עלייה בטלפון מראש. הטיסה יוצאת ב-20:25.', cost:'—', link:'', linkLabel:'', mapQuery:''},
-  ],
-};
-
-const costsOverview = [
-  {cat:'נסיעות בינ״ל ובין־עירוניות', item:'FlixBus קושיצה → סטארי סמוקובץ\'', cost:'8–15 € לאדם', link:'https://www.flixbus.com', linkLabel:'FlixBus'},
-  {cat:'נסיעות בינ״ל ובין־עירוניות', item:'רכבת ישירה Tatran/IC פופראד → ברטיסלבה', cost:'15–25 € לאדם (מחלקה 2)', link:'https://www.zssk.sk/en/', linkLabel:'ZSSK'},
-  {cat:'תחבורה מקומית', item:'רכבת חשמלית בטטרה (TEŽ)', cost:'2–4 € לנסיעה / כרטיס תלת-יומי ~8 €', link:'', linkLabel:''},
-  {cat:'תחבורה מקומית', item:'אוטובוס טטרנסקה לומניצה ↔ ז\'דיאר', cost:'2–4 € לנסיעה', link:'', linkLabel:''},
-  {cat:'תחבורה מקומית', item:'אוטובוסים עירוניים בברטיסלבה (קווים 29, 61)', cost:'1–1.5 € לנסיעה', link:'', linkLabel:''},
-  {cat:'אטרקציות', item:'רכבל פוניקולר להרביאנוק', cost:'11–15 € למבוגר', link:'', linkLabel:''},
-  {cat:'אטרקציות', item:'שכירת קורקינט הרים (ירידה מהרביאנוק)', cost:'10–12 € לקורקינט', link:'', linkLabel:''},
-  {cat:'אטרקציות', item:'מגלשת הרים Tatrabob', cost:'5–7 € לנסיעה', link:'http://www.tatrabob.sk/', linkLabel:'Tatrabob'},
-  {cat:'אטרקציות', item:'פארק המים AquaCity Poprad', cost:'27–32 € כרטיס יומי מלא', link:'https://aquacity.sk/en/', linkLabel:'AquaCity'},
-  {cat:'אטרקציות', item:'טירת דווין', cost:'6 € מבוגר / 3 € נוער', link:'', linkLabel:''},
-  {cat:'אטרקציות', item:'תצפית UFO בברטיסלבה', cost:'10 € מבוגר / 7 € נוער', link:'', linkLabel:''},
-  {cat:'אטרקציות', item:'רכבל סקלנטה פלסו (GoPass)', cost:'110–130 € למשפחה', link:'https://www.gopass.travel/', linkLabel:'GoPass'},
-  {cat:'אטרקציות', item:'Tatras Tower — מגדל התצפית בשטרבסקה פלסו', cost:'~14–18 € למבוגר, הנחת נוער', link:'https://vezasnov.sk/', linkLabel:'Tatras Tower'},
-  {cat:'אטרקציות', item:'רכבל סוליסקום מ-Štrbské Pleso (אופציונלי)', cost:'~15–20 € למבוגר', link:'', linkLabel:''},
-  {cat:'אטרקציות', item:'מסלול צמרות העצים — Bachledka', cost:'~15–20 € למבוגר, הנחת נוער', link:'https://www.bachledka.sk/', linkLabel:'Bachledka'},
+const booking=[
+ ['flight','טיסות וצ׳ק-אין','לשמור כרטיסי עלייה למטוס גם בצילום מסך.'],
+ ['budapest-hotel','לינה בבודפשט','2 לילות באזור Deák tér או מרכז פשט.'],
+ ['miskolc-hotel','לינה במישקולץ','לילה אחד ליד התחנה או האצטדיון.'],
+ ['tatras-hotel','לינה בנובי סמוקובץ','לוודא גישה נוחה לרכבת החשמלית.'],
+ ['bratislava-hotel','לינה בברטיסלבה','קרוב לעיר העתיקה או לקו תחבורה מרכזי.'],
+ ['budapest-train','רכבת בודפשט–מישקולץ','להזמין מקומות ישיבה.'],
+ ['kosice-train','מישקולץ–קושיצה','לאמת לוח זמנים חוצה גבול.'],
+ ['tatras-transfer','קושיצה–הטטרה','להחליט FlixBus או רכבת דרך פופראד.'],
+ ['poprad-train','פופראד–ברטיסלבה','להזמין רכבת ישירה ומקומות ישיבה.'],
+ ['baths','מרחצאות Széchenyi','כרטיסים לשעה הרצויה.'],
+ ['cruise','שייט ערב בבודפשט','לבדוק רציף מדויק ומדיניות ביטול.'],
+ ['aquacity','AquaCity Poprad','לבדוק שעות פתיחה וכרטיס משפחתי.'],
+ ['cablecars','רכבלים בטטרה','לבדוק תחזית ומדיניות שינוי.'],
+ ['offline','מסמכים אופליין','כרטיסים, כתובות מלונות וביטוח.']
 ];
-
-// ---------- RENDER ITEMS ----------
-function renderItems(containerId, items) {
-  const el = document.getElementById(containerId);
-  el.innerHTML = items.map(it => `
-    <div class="item-card" data-search="${(it.place + ' ' + it.activity + ' ' + it.route).replace(/"/g,'')}">
-      <div class="item-time">${it.time}</div>
-      <div class="item-body">
-        ${it.place ? `<div class="place-line">📍 ${it.place}</div>` : ''}
-        <h3 class="activity-title">${it.activity}</h3>
-        ${it.route ? `<p class="route-text">🧭 ${it.route}</p>` : ''}
-        <div class="badges">
-          ${it.cost ? `<span class="badge cost">💰 ${it.cost}</span>` : ''}
-          ${it.link ? `<span class="badge link"><a href="${it.link}" target="_blank" rel="noopener">🔗 ${it.linkLabel}</a></span>` : ''}
-          ${it.mapQuery ? `<span class="badge map"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.mapQuery)}" target="_blank" rel="noopener">🗺️ מפה</a></span>` : ''}
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-Object.keys(days).forEach(k => renderItems(k + 'list', days[k]));
-
-// ---------- CHECKLIST ----------
-function getState() {
-  try { return JSON.parse(localStorage.getItem('sk_trip_checklist') || '{}'); } catch(e) { return {}; }
-}
-function renderChecklist() {
-  const state = getState();
-  const el = document.getElementById('checklist');
-  el.innerHTML = bookingItems.map(b => `
-    <div class="check-card ${state[b.id] ? 'done' : ''}" id="card-${b.id}">
-      <input type="checkbox" id="chk-${b.id}" ${state[b.id] ? 'checked' : ''} onchange="toggleCheck('${b.id}')">
-      <div class="check-body">
-        <div class="ct">${b.urgent ? '<span class="urgent-badge">דחוף</span>' : ''}${b.title}</div>
-        <div class="cd">${b.desc}</div>
-        ${b.link ? `<a class="link-btn" href="${b.link}" target="_blank" rel="noopener">${b.linkLabel}</a>` : ''}
-      </div>
-    </div>
-  `).join('');
-  updateProgress(state);
-}
-function updateProgress(state) {
-  const total = bookingItems.length;
-  const done = bookingItems.filter(b => state[b.id]).length;
-  document.getElementById('progressLabel').textContent = `${done} מתוך ${total} הושלמו`;
-  document.getElementById('progressBar').style.width = (total ? (done/total*100) : 0) + '%';
-}
-function toggleCheck(id) {
-  const state = getState();
-  state[id] = document.getElementById('chk-' + id).checked;
-  localStorage.setItem('sk_trip_checklist', JSON.stringify(state));
-  document.getElementById('card-' + id).classList.toggle('done', !!state[id]);
-  updateProgress(state);
-}
-renderChecklist();
-document.getElementById('resetBtn').addEventListener('click', () => {
-  if (confirm('לאפס את כל הסימונים ברשימת ההזמנות?')) {
-    localStorage.removeItem('sk_trip_checklist');
-    renderChecklist();
-    showToast('הסימונים אופסו');
-  }
-});
-
-// ---------- COSTS ----------
-function renderCosts() {
-  const table = document.getElementById('costsTable');
-  let html = '<thead><tr><th>פריט</th><th>עלות משוערת</th><th>לינק</th></tr></thead><tbody>';
-  let lastCat = '';
-  costsOverview.forEach(c => {
-    if (c.cat !== lastCat) { html += `<tr class="cat-head"><td colspan="3">${c.cat}</td></tr>`; lastCat = c.cat; }
-    html += `<tr><td>${c.item}</td><td>${c.cost}</td><td>${c.link ? `<a href="${c.link}" target="_blank" rel="noopener">${c.linkLabel}</a>` : '—'}</td></tr>`;
-  });
-  html += '</tbody>';
-  table.innerHTML = html;
-}
-renderCosts();
-
-// ---------- TABS + DEEP LINK ----------
-function showPage(page, push) {
-  const btn = document.querySelector(`nav.tabs button[data-page="${page}"]`);
-  if (!btn) return;
-  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('section.page').forEach(s => s.classList.remove('active'));
-  document.getElementById(page).classList.add('active');
-  if (push && location.hash !== '#' + page) history.replaceState(null, '', '#' + page);
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-document.getElementById('tabs').addEventListener('click', (e) => {
-  const btn = e.target.closest('button[data-page]');
-  if (btn) showPage(btn.dataset.page, true);
-});
-window.addEventListener('hashchange', () => { const p = location.hash.replace('#',''); if (p) showPage(p, false); });
-(function(){ const p = location.hash.replace('#',''); if (p) showPage(p, false); })();
-
-// ---------- SEARCH ----------
-['budapest','miskolc','day1','day2','day3','day4','day5'].forEach(id => {
-  const sec = document.getElementById(id);
-  const list = document.getElementById(id + 'list');
-  const wrap = document.createElement('div');
-  wrap.className = 'search-wrap';
-  wrap.innerHTML = `<input type="text" placeholder="חיפוש מהיר ביום זה…" aria-label="חיפוש">`;
-  const noRes = document.createElement('div');
-  noRes.className = 'no-results';
-  noRes.textContent = 'לא נמצאו תוצאות ליום זה.';
-  sec.insertBefore(wrap, list);
-  sec.insertBefore(noRes, list.nextSibling);
-  wrap.querySelector('input').addEventListener('input', (e) => {
-    const q = e.target.value.trim().toLowerCase();
-    let shown = 0;
-    list.querySelectorAll('.item-card').forEach(card => {
-      const match = !q || (card.dataset.search || '').toLowerCase().includes(q);
-      card.style.display = match ? '' : 'none';
-      if (match) shown++;
-    });
-    noRes.style.display = shown ? 'none' : 'block';
-  });
-});
-
-// ---------- THEME ----------
-const themeBtn = document.getElementById('themeBtn');
-function applyTheme(t) {
-  document.documentElement.setAttribute('data-theme', t);
-  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
-  document.querySelector('meta[name=theme-color]').setAttribute('content', t === 'dark' ? '#0d1513' : '#0e3b3b');
-}
-applyTheme(localStorage.getItem('sk_theme') || 'light');
-themeBtn.addEventListener('click', () => {
-  const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('sk_theme', t);
-  applyTheme(t);
-});
-
-// ---------- PRINT ----------
-document.getElementById('printBtn').addEventListener('click', () => window.print());
-
-// ---------- SHARE ----------
-document.getElementById('shareBtn').addEventListener('click', async () => {
-  const url = location.href;
-  const text = 'מדריך הטיול המשפחתי לסלובקיה 🏔️';
-  if (navigator.share) { try { await navigator.share({title: text, url}); return; } catch(e) {} }
-  try {
-    await navigator.clipboard.writeText(url);
-    showToast('הקישור הועתק! אפשר להדביק בוואטסאפ 📋');
-  } catch(e) { window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank'); }
-});
-
-// ---------- COUNTDOWN ----------
-(function(){
-  const target = new Date('2026-07-21T00:00:00');
-  const el = document.getElementById('countdown');
-  function tick(){
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0) {
-      const end = new Date('2026-07-29T00:00:00');
-      el.textContent = now < end ? '🎉 הטיול קורה עכשיו — תיהנו!' : '✈️ הטיול הסתיים · מקווים שהיה מדהים';
-      return;
-    }
-    const d = Math.floor(diff / 86400000);
-    el.textContent = `⏳ עוד ${d} ימים לטיול`;
-  }
-  tick(); setInterval(tick, 3600000);
-})();
-
-// ---------- PACKING ----------
-const packingItems = [
-  {cat:'🏔️ להרים (חובה — גם בקיץ)', items:['שכבת פליז / סווטשירט חם לכל אחד','מעיל או ברדס גשם קל ומתקפל','נעלי הליכה סגורות ונוחות','חולצות שכבה ארוכה (לרכבלים ולתצפיות)','גרביים נוחות להליכות']},
-  {cat:'🩱 לפארק המים (AquaCity)', items:['בגד ים לכל אחד','כפכפים','מגבת קטנה / מגבת מהירת ייבוש','משקפת שחייה (אופציונלי)']},
-  {cat:'☀️ שמש והגנה', items:['כובע לכל אחד','משקפי שמש','קרם הגנה (בגובה השמש חזקה)','בקבוק מים רב-פעמי']},
-  {cat:'🎒 ציוד יומי וטכני', items:['תיק גב קטן ליום','מתאם שקע אירופי (Type E/F)','פאוור-בנק + כבלי טעינה','ערכת עזרה ראשונה + פלסטרים לשלפוחיות','נייר טואלט/טישו קטן לדרך']},
-  {cat:'🏙️ לברטיסלבה החמה', items:['בגדים קלילים ואווריריים','סנדלים נוחים להליכה','חולצה/שמלה קלה לערב']},
-  {cat:'📄 מסמכים וכסף', items:['דרכונים + צילום/סריקה בטלפון','כרטיסי טיסה — צ\'ק-אין אונליין מראש','כרטיסי אשראי + מזומן ביורו','אישורי לינה מודפסים/בטלפון','ביטוח נסיעות']},
+const packing=[
+ ['passports','דרכונים וכרטיסים','כולל צילומי מסך ועותק בענן.'],['insurance','ביטוח נסיעות','מספר פוליסה ומוקד חירום.'],
+ ['shoes','נעלי הליכה עם אחיזה','לשבילים רטובים וסלעיים.'],['rain','מעיל גשם קל','אחד לכל מטייל.'],
+ ['layers','שכבה חמה','גם ביולי קר בגובה וברכבלים.'],['swim','בגד ים וכפכפים','למרחצאות ול-AquaCity.'],
+ ['towel','מגבת קלה','מתייבשת מהר.'],['bottle','בקבוק מים רב-פעמי','למלא בכל בוקר.'],
+ ['power','מטענים וסוללה ניידת','יום ארוך של ניווט וכרטיסים.'],['medicine','תרופות קבועות','בתיק היד ולא במזוודה.'],
+ ['sun','קרם הגנה וכובע','הקרינה בגובה חזקה.'],['snacks','חטיפים לדרך','לרכבות ולמסלולים.']
 ];
-function getPack() { try { return JSON.parse(localStorage.getItem('sk_trip_packing') || '{}'); } catch(e) { return {}; } }
-function packId(c,i){ return 'p_' + c + '_' + i; }
-function renderPacking() {
-  const state = getPack();
-  const el = document.getElementById('packlist');
-  el.innerHTML = packingItems.map((g, gi) => `
-    <div style="margin-bottom:14px;">
-      <div class="progress-label" style="margin:8px 2px 8px; font-weight:700; color:var(--accent);">${g.cat}</div>
-      ${g.items.map((it, ii) => { const id = packId(gi,ii); return `
-        <div class="check-card ${state[id]?'done':''}" id="card-${id}">
-          <input type="checkbox" id="chk-${id}" ${state[id]?'checked':''} onchange="togglePack('${id}')">
-          <div class="check-body"><div class="ct">${it}</div></div>
-        </div>`; }).join('')}
-    </div>`).join('');
-  updatePackProgress(state);
-}
-function updatePackProgress(state) {
-  let total = 0; packingItems.forEach(g => total += g.items.length);
-  const done = Object.values(state).filter(Boolean).length;
-  document.getElementById('packLabel').textContent = `${done} מתוך ${total} נארזו`;
-  document.getElementById('packBar').style.width = (total ? done/total*100 : 0) + '%';
-}
-function togglePack(id) {
-  const state = getPack();
-  state[id] = document.getElementById('chk-' + id).checked;
-  localStorage.setItem('sk_trip_packing', JSON.stringify(state));
-  document.getElementById('card-' + id).classList.toggle('done', !!state[id]);
-  updatePackProgress(state);
-}
-renderPacking();
-document.getElementById('packReset').addEventListener('click', () => {
-  if (confirm('לאפס את כל רשימת האריזה?')) { localStorage.removeItem('sk_trip_packing'); renderPacking(); showToast('רשימת האריזה אופסה'); }
-});
-
-// ---------- LIVE WEATHER (Open-Meteo) ----------
-const TRIP_START = '2026-07-24', TRIP_END = '2026-07-28';
-const weatherLocs = [
-  {name:'בודפשט', emoji:'🇭🇺', lat:47.50, lon:19.04},
-  {name:'הרי הטטרה (פופראד)', emoji:'🏔️', lat:49.06, lon:20.30},
-  {name:'ברטיסלבה', emoji:'🏙️', lat:48.15, lon:17.11},
-];
-function wCode(c) {
-  if (c===0) return ['☀️','בהיר'];
-  if (c===1||c===2) return ['🌤️','מעונן חלקית'];
-  if (c===3) return ['☁️','מעונן'];
-  if (c===45||c===48) return ['🌫️','ערפל'];
-  if (c>=51&&c<=57) return ['🌦️','טפטוף'];
-  if (c>=61&&c<=67) return ['🌧️','גשם'];
-  if (c>=71&&c<=77) return ['🌨️','שלג'];
-  if (c>=80&&c<=82) return ['🌦️','ממטרים'];
-  if (c>=85&&c<=86) return ['🌨️','ממטרי שלג'];
-  if (c>=95) return ['⛈️','סופת רעמים'];
-  return ['🌡️','—'];
-}
-const heDays = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
-function fmtDate(iso) {
-  const d = new Date(iso + 'T00:00:00');
-  return { wd: heDays[d.getDay()], dm: d.getDate() + '.' + (d.getMonth()+1) };
-}
-async function loadWeather() {
-  const container = document.getElementById('weatherContent');
-  try {
-    const blocks = await Promise.all(weatherLocs.map(async loc => {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}` +
-        `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
-        `&timezone=Europe%2FBratislava&forecast_days=16`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('net');
-      const d = await res.json();
-      const t = d.daily.time;
-      const tripIdx = t.map((x,i)=>i).filter(i => t[i] >= TRIP_START && t[i] <= TRIP_END);
-      const hasTrip = tripIdx.length > 0;
-      const idxs = hasTrip ? tripIdx : t.map((x,i)=>i);
-      const cards = idxs.map(i => {
-        const [emoji, desc] = wCode(d.daily.weather_code[i]);
-        const f = fmtDate(t[i]);
-        const isTrip = t[i] >= TRIP_START && t[i] <= TRIP_END;
-        return `<div class="wday ${isTrip?'trip':''}">
-          <div class="wd-date">${f.wd} · ${f.dm}</div>
-          ${isTrip?'<div class="wd-trip">● טיול</div>':'<div class="wd-trip">&nbsp;</div>'}
-          <div class="wd-emoji">${emoji}</div>
-          <div class="wd-desc">${desc}</div>
-          <div class="wd-temp">${Math.round(d.daily.temperature_2m_max[i])}° <span class="lo">/ ${Math.round(d.daily.temperature_2m_min[i])}°</span></div>
-          <div class="wd-rain">💧 ${d.daily.precipitation_probability_max[i] ?? 0}%</div>
-        </div>`;
-      }).join('');
-      const note = hasTrip ? '' : `<div class="wd-date" style="margin:0 2px 8px;color:var(--muted);font-size:.82rem;">התחזית לתאריכי הטיול עדיין מחוץ לטווח — בינתיים מוצגים 16 הימים הקרובים. התאריכים יודגשו אוטומטית כשייכנסו לטווח.</div>`;
-      return `<div class="weather-loc"><h3>${loc.emoji} ${loc.name}</h3>${note}<div class="weather-days">${cards}</div></div>`;
-    }));
-    const now = new Date();
-    container.innerHTML = blocks.join('') +
-      `<div class="weather-updated">🔄 עודכן: ${now.toLocaleString('he-IL',{day:'numeric',month:'numeric',hour:'2-digit',minute:'2-digit'})} · מקור: Open-Meteo</div>`;
-  } catch(e) {
-    container.innerHTML = `<p class="note">לא הצלחנו לטעון את התחזית כרגע (אולי אין חיבור לאינטרנט). התחזית תיטען שוב בפתיחה הבאה. בינתיים אפשר להיעזר בממוצע העונתי למטה.</p>`;
-  }
-}
-loadWeather();
-
-// ---------- TOAST ----------
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
-}
+function renderDays(){document.getElementById('days').innerHTML=itinerary.map(day=>`<article class="card day-card"><div class="day-head"><h3>${day.title}</h3><span class="day-date">${day.date}</span></div><div class="timeline">${day.stops.map(s=>`<div class="stop"><div class="stop-time">${s[0]}</div><div><h4>${s[1]}</h4><p>${s[2]}</p><div class="tags">${s[3].map(t=>`<span class="tag">${t}</span>`).join('')}</div></div></div>`).join('')}</div></article>`).join('')}
+function renderChecklist(type,data){const box=document.getElementById(type+'List');const saved=JSON.parse(localStorage.getItem('trip-'+type)||'{}');box.innerHTML=data.map(([id,title,desc])=>`<label class="check-item ${saved[id]?'done':''}"><input type="checkbox" data-id="${id}" ${saved[id]?'checked':''}><span><span class="check-title">${title}</span><br><span class="check-desc">${desc}</span></span></label>`).join('');box.querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{saved[input.dataset.id]=input.checked;localStorage.setItem('trip-'+type,JSON.stringify(saved));input.closest('.check-item').classList.toggle('done',input.checked);updateProgress(type,data)}));updateProgress(type,data)}
+function updateProgress(type,data){const saved=JSON.parse(localStorage.getItem('trip-'+type)||'{}');const done=data.filter(([id])=>saved[id]).length;document.getElementById(type+'Bar').style.width=(done/data.length*100)+'%';document.getElementById(type+'Text').textContent=`${done}/${data.length}`}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.tab').forEach(t=>{const active=t.dataset.page===id;t.classList.toggle('active',active);t.setAttribute('aria-selected',active)});history.replaceState(null,'','#'+id);window.scrollTo({top:0,behavior:'smooth'})}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>showPage(t.dataset.page)));
+document.querySelectorAll('[data-reset]').forEach(btn=>btn.addEventListener('click',()=>{const type=btn.dataset.reset;if(confirm('לאפס את כל הסימונים ברשימה?')){localStorage.removeItem('trip-'+type);renderChecklist(type,type==='booking'?booking:packing)}}));
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+document.getElementById('shareBtn').addEventListener('click',async()=>{try{if(navigator.share){await navigator.share({title:document.title,url:location.href})}else{await navigator.clipboard.writeText(location.href);toast('הקישור הועתק')}}catch(e){}});
+const savedTheme=localStorage.getItem('trip-theme');if(savedTheme)document.documentElement.dataset.theme=savedTheme;function syncTheme(){document.getElementById('themeBtn').textContent=document.documentElement.dataset.theme==='dark'?'☀️':'🌙'}syncTheme();document.getElementById('themeBtn').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('trip-theme',next);syncTheme()});
+const tripDate=new Date('2026-07-21T00:00:00');const diff=Math.ceil((tripDate-new Date())/86400000);document.getElementById('countdown').textContent=diff>0?`⏳ עוד ${diff} ימים לטיול`:diff===0?'✈️ הטיול מתחיל היום!':'📸 הטיול כבר התחיל';
+renderDays();renderChecklist('booking',booking);renderChecklist('packing',packing);const hash=location.hash.slice(1);if(['overview','itinerary','booking','packing','tips'].includes(hash))showPage(hash);
 </script>
 </body>
 </html>
